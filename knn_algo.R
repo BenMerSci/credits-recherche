@@ -59,8 +59,11 @@ for(i in 1:length(target_list)){
 for(i in length(target_list)){
   target_sp <- target_list[[i]]
   unknown_inter <- which(is.na(target_sp[1,]))
-    if(unknown_inter){}
+    for(j in unknown_inter){
+      if(!all(is.na(target_sp[,j]))){prob_inter <- (sum(target_sp[,j], na.rm = T))/(sum(!is.na(target_sp[,j])))}
+      
+      if(prob_inter>0.5){target_sp[1,j] = 1} else{target_sp[1,j] = 0}
+    }
 }
 
-which(is.na(test[1,]))
-which(all(is.na(x)))
+
