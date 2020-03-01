@@ -4,20 +4,31 @@ setwd("/home/benjamin/Documents/credits_recherche") #Set my working directory
 #libraries needed
 library(vegan) #library vegan needed for vegdist()
 library(tidyverse)
-
+library(taxize)
+rm(apg_families, apg_orders, theplantlist, rank_ref)
 #Uplaod the matrix
-L <- read_rds("R/matrix_inter.RDS") %>% #Read the matrix
-  t(.) #Transpose the matrix, so the pred are listed in rows and not columns, for the distance mesure
+L <- read_rds("R/final_matrix_inter_wide.RDS")#Read the matrix
+
+#pred_phylogeny <- read_rds("R/pred_phylogeny.RDS")
+# pred_names  <- rownames(L)
+# phyl <- list()
+# for(i in 1:length(pred_names)){
+#   phyl <- classification(pred_names, db = "gbif")
+#    Sys.sleep(0.4)
+# }
+# 
+# phyl_dist <- class2tree(phyl)
+# 
+# 
 
 #Distance matrix
 D_matrix <- vegdist(L, method = "jaccard", na.rm = TRUE)  # Calculate the distance for each pred
 D <- as.matrix(D_matrix) #Put the dist object in matrix form
 
 #Find the k nearest-neighbors for each pred
-#knn_algo <- function(L, D, target, k){}
+knn_algo <- function(L, D, k){ # need to add the variable target somehow
 
-k <- 10 #Set your k
-pred_neighbor <- as.data.frame(matrix(nrow = nrow(D), ncol = k)) #Create an empty matrix to be filled
+pred_neighbor <- matrix(nrow = nrow(D), ncol = k) #Create an empty matrix to be filled
 #each row of the matrix is a pred specie and the columns are its KNN
 for(i in 1:nrow(pred_neighbor)){ #for loop that will go over each pred species
     count <- 0            #Initializing count, that will go up to the value of k
@@ -31,7 +42,7 @@ for(i in 1:nrow(pred_neighbor)){ #for loop that will go over each pred species
           temp_pred <- temp_pred[-which.min(temp_pred)] #remove the current KNN from the row
           count <- count + 1 #Add +1 to count and go to the next KNN
         }else{
-          temp_pred <- temp_pred[-which.min(temp_pred)] #Remove the KNN from the row if it was the same                                                         specie
+          temp_pred <- temp_pred[-which.min(temp_pred)] #Remove the KNN from the row if it was the same specie
         }
       }
     pred_neighbor[i,] <- pred_list #Store the KNN of the pred specie in the matrix
@@ -47,7 +58,7 @@ for(i in 1:nrow(D)){ #for loop, that will iterate from 1 through the number of p
 }
 
 for(i in 1:length(target_list)){ #for loop that will go through each element of the list
-  temp_vect <- as.data.frame(as.matrix(unlist(pred_neighbor[i,]), nrow = ncol(pred_neighbor[i,]), ncol = 1)) #temp_vect get the name of the KNN 
+  temp_vect <- as.matrix(unlist(pred_neighbor[i,]), nrow = ncol(pred_neighbor[i,]), ncol = 1) #temp_vect get the name of the KNN 
   rownames(temp_vect) <- temp_vect[,1] #Put the name of the KNN as row names
   temp_vect <- temp_vect[,-1] #Remove their name from the 1st column
   temp_vect <- transform(merge(temp_vect, as.data.frame(L), by = 0, all = FALSE)) #Get the diet info of each KNN pred species
@@ -57,14 +68,22 @@ for(i in 1:length(target_list)){ #for loop that will go through each element of 
 }
 
 #Compute the probability for each species
-for(i in length(target_list)){ #for loop, that will go through each element of the list
+for(i in 1:length(target_list)){ #for loop, that will go through each element of the list
   target_sp <- target_list[[i]] #Get the i matrix of the list
   unknown_inter <- which(is.na(target_sp[1,])) #Get each col number for which the interaction is NA
     for(j in unknown_inter){ #loop through the unknown interactions
       if(!all(is.na(target_sp[,j]))){prob_inter <- (sum(target_sp[,j], na.rm = T))/(sum(!is.na(target_sp[,j])))} else{prob_inter <- NA} #if the column isn't all NA, we calculate the probability of interaction by summing the column of 0 and 1 (and omitting the NAs), and divide by the sum of 0 and 1 in the column. If the columns was all NA, we attribute NA to prob_inter.
       
       if(is.na(prob_inter)){target_sp[1,j] = NA} else{ 
-        if(prob_inter > 0.5){target_sp[1,j] = 1} else{target_sp[1,j] = 0}} #If prob_inter is NA, we keep the NA as interaction, since we can't know. Else, if depending on the probability that is between 0 and 1, we will put 0 or 1 as the interaction. 
+        target_sp[1,j] = sample(c(0,1), size = 1, prob = c(1-prob_inter, prob_inter))} #If prob_inter is NA, we keep the NA as interaction, since we can't know. Else, if depending on the probability that is between 0 and 1, we will put 0 or 1 as the interaction. 
     }
+  target_list[[i]] <- target_sp
 }
 
+infered_matrix <- as.matrix(do.call(rbind, (lapply(target_list, function(x) x[1,]))))
+
+return(infered_matrix)
+}
+infered_matrix <- knn_algo(L, D, k = 5)
+
+write_rds(infered_matrix, "R/infered_matrix.RDS")

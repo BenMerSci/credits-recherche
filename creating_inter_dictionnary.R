@@ -29,8 +29,8 @@ meta_network$pred_scientific <-  paste0(str_to_upper(str_extract(meta_network$pr
 meta_network$prey_scientific <-  paste0(str_to_upper(str_extract(meta_network$prey_scientific, ".{1}")), str_remove(meta_network$prey_scientific, ".{1}"))
 
 #write it to .csv
-write.csv(meta_network, "R/meta_network_long.csv", row.names = F)
-meta_network <- read.csv("R/meta_network_long.csv", header = T)
+write.csv(meta_network, "R/matrix_inter_long.csv", row.names = F)
+meta_network <- read.csv("R/matrix_inter_long.csv", header = T)
 
 #Checking the number of unique pred in the system, to see how many columns I should have
 #Final correction for taxo too, to see if we have duplicate but written different
@@ -49,14 +49,11 @@ L <- spread(meta_network, pred_scientific, interaction)
 rownames(L) <- L$prey_scientific
 L <- L[,-1]
 
+#Removing the pred that are just genus and no species
 pred_name <- colnames(L)
 correct_name <- str_detect(pred_name, " ")
 L <- L[,c(correct_name)]
 
-write_rds(L, "R/matrix_inter.RDS")
 
-
-
-
-
-
+write_rds(L, "R/matrix_inter_wide.RDS")
+rm(list=(ls()))
