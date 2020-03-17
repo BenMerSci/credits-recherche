@@ -5,7 +5,7 @@ setwd("/home/benjamin/Documents/credits_recherche/")
 library(tidyverse)
 library(stringr)
 library(taxize)
-source("R/sep_pooled_many.R")
+source("R/formatting_scripts_and_functions/sep_pooled_many.R")
 rm(rank_ref, theplantlist, apg_families, apg_orders)
 
 #Original manip from the mangal project
@@ -77,22 +77,20 @@ names.of.web[[1]][6,1] <- "vole (Microtus)"
 names.of.web[[1]][7,1] <- "13-striped spermophile (ground squirrel)"
 names.of.web[[1]][8,1] <- "pocket gopher (Thomomys)"
 names.of.web[[1]][9,1] <- "insects in herb and surface stratum"
-names.of.web[[1]][9,3] <- "arthropoda"
-names.of.web[[1]][14,3] <- "arthropoda"
+names.of.web[[1]][9,3] <- "insecta"
+names.of.web[[1]][14,3] <- "insecta"
 names.of.web[[1]] <- names.of.web[[1]][-c(5),]
 
-names.of.web[[2]][5,3] <- "arthropoda"
+names.of.web[[2]][6,3] <- "Disonycha quinquevittatum"
 names.of.web[[2]][13,3] <- "Quiscalus quiscula"
 names.of.web[[2]][15,1] <- "Maryland yellowthroat"
 names.of.web[[2]][15,3] <- "Geothlypis trichas"
 
 names.of.web[[3]][1,1] <- "spiders (mature forest)"
 names.of.web[[3]][2,1]  <- "insects (mature forest)"
-names.of.web[[3]][2,3] <- "arthropoda"
 names.of.web[[3]][30,1] <- "redbacked vole (Evolomys)"
 names.of.web[[3]] <- names.of.web[[3]][-37,]
 
-names.of.web[[4]][1,3] <- "arthropoda"
 names.of.web[[4]][17,1] <- "Maryland yellowthroat"
 names.of.web[[4]][17,3] <- "Geothlypis trichas"
 names.of.web[[4]][21,3] <-"Quiscalus quiscula"
@@ -166,8 +164,9 @@ web26$interaction[web26$interaction == -1] <- 1
 #manually fixing empty scientific names
 web23$pred_scientific[web23$pred_common == "badger"] <- "mustelidae"
 web23 <- drop_na(web23)
-web25$prey_scientific[web25$prey_common == "insects (forest edge)"] <- "arthropoda"
+web25$prey_scientific[web25$prey_common == "insects (forest edge)"] <- "insecta"
 web25$prey_scientific[web25$prey_common == "redbacked vole"] <- "myodes"
+web25$pred_scientific[web25$pred_common == "redbacked vole"] <- "myodes"
 web26$pred_scientific[web26$pred_common == "goshawk"] <- "accipiter gentilis"
 
 #putting the scientific names back to capital letters

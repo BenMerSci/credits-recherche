@@ -1,3 +1,6 @@
+# Made by Clément Violet, for the mangal.io database project
+# Re-used here for cleaning dataset that were in the mangal.io project
+
 sep_pooled <- function(x, sep){
   
   require(tidyr)

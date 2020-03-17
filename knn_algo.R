@@ -3,40 +3,33 @@ setwd("/home/benjamin/Documents/credits_recherche") #Set my working directory
 
 #libraries needed
 library(vegan) #library vegan needed for vegdist()
+library(plyr)
 library(tidyverse)
+library(purrr)
 library(taxize)
 rm(apg_families, apg_orders, theplantlist, rank_ref)
-#Uplaod the matrix
-L <- read_rds("R/final_matrix_inter_wide.RDS")#Read the matrix
 
-#pred_phylogeny <- read_rds("R/pred_phylogeny.RDS")
-# pred_names  <- rownames(L)
-# phyl <- list()
-# for(i in 1:length(pred_names)){
-#   phyl <- classification(pred_names, db = "gbif")
-#    Sys.sleep(0.4)
-# }
-# 
-# phyl_dist <- class2tree(phyl)
-# 
-# 
+# Uplaod the interaction matrix
+L <- read_rds("data/intermediate_object_results/matrix_inter_wide.RDS")
+L_allQc <- read_rds("data/intermediate_object_results/matrix_inter_wide_all.RDS")
 
-#Distance matrix
-D_matrix <- vegdist(L, method = "jaccard", na.rm = TRUE)  # Calculate the distance for each pred
-D <- as.matrix(D_matrix) #Put the dist object in matrix form
+# Upload the distances matrix
+D <- read_rds("data/intermediate_object_results/dist_mat_metanetwork.RDS")
+D_allQc <- read_rds("data/intermediate_object_results/dist_mat_allQc.RDS")
 
 #Find the k nearest-neighbors for each pred
 knn_algo <- function(L, D, k){ # need to add the variable target somehow
-
 pred_neighbor <- matrix(nrow = nrow(D), ncol = k) #Create an empty matrix to be filled
 #each row of the matrix is a pred specie and the columns are its KNN
 for(i in 1:nrow(pred_neighbor)){ #for loop that will go over each pred species
     count <- 0            #Initializing count, that will go up to the value of k
     pred_list <- NULL     #Initializing pred_list, that will be filled with the names of the KNN
     temp_pred <- D[i,]    #Initializing temp_pred, will take each pred by row with his distances
+    if(sum(temp_pred, na.rm = TRUE) == 0){next}
     
       while(count < k){ #while loop that will count up to k
         nameMin <- names(which.min(temp_pred)) #nameMin will get the names of the KNN
+        #nameMin <- names(which(temp_pred == min(temp_pred, na.rm =TRUE)))
         if(nameMin != rownames(D)[i]){ #If the name of the KNN is not the species that we are looking at
           pred_list <- append(pred_list, nameMin) #Store the name of the KNN
           temp_pred <- temp_pred[-which.min(temp_pred)] #remove the current KNN from the row
@@ -70,9 +63,11 @@ for(i in 1:length(target_list)){ #for loop that will go through each element of 
 #Compute the probability for each species
 for(i in 1:length(target_list)){ #for loop, that will go through each element of the list
   target_sp <- target_list[[i]] #Get the i matrix of the list
+  if(nrow(target_sp) < 2){next}
+  
   unknown_inter <- which(is.na(target_sp[1,])) #Get each col number for which the interaction is NA
     for(j in unknown_inter){ #loop through the unknown interactions
-      if(!all(is.na(target_sp[,j]))){prob_inter <- (sum(target_sp[,j], na.rm = T))/(sum(!is.na(target_sp[,j])))} else{prob_inter <- NA} #if the column isn't all NA, we calculate the probability of interaction by summing the column of 0 and 1 (and omitting the NAs), and divide by the sum of 0 and 1 in the column. If the columns was all NA, we attribute NA to prob_inter.
+      if(!all(is.na(target_sp[,j]))){prob_inter <- (sum(unlist(target_sp[,j]), na.rm = T))/(sum(!is.na(target_sp[,j])))} else{prob_inter <- NA} #if the column isn't all NA, we calculate the probability of interaction by summing the column of 0 and 1 (and omitting the NAs), and divide by the sum of 0 and 1 in the column. If the columns was all NA, we attribute NA to prob_inter.
       
       if(is.na(prob_inter)){target_sp[1,j] = NA} else{ 
         target_sp[1,j] = sample(c(0,1), size = 1, prob = c(1-prob_inter, prob_inter))} #If prob_inter is NA, we keep the NA as interaction, since we can't know. Else, if depending on the probability that is between 0 and 1, we will put 0 or 1 as the interaction. 
@@ -80,10 +75,18 @@ for(i in 1:length(target_list)){ #for loop, that will go through each element of
   target_list[[i]] <- target_sp
 }
 
-infered_matrix <- as.matrix(do.call(rbind, (lapply(target_list, function(x) x[1,]))))
+infered_matrix <- do.call(rbind, (lapply(target_list, function(x) x[1,])))
+#test <- matrix(infered_matrix)
+#test <- do.call(rbind, (lapply(matrix(infered_matrix), function(x) x)))
 
 return(infered_matrix)
 }
-infered_matrix <- knn_algo(L, D, k = 5)
 
-write_rds(infered_matrix, "R/infered_matrix.RDS")
+system.time(infered_matrix_metanetwork <- knn_algo(L, D, k = 5))
+system.time(infered_matrix_allQc <- knn_algo(L_allQc, D_allQc, k = 5))
+
+write_rds(infered_matrix_metanetwork, "data/intermediate_object_results/infered_matrix_metanetwork")
+write_rds(infered_matrix_allQc, "data/intermediate_object_results/infered_matrix_allQc")
+rm(list=ls())
+
+   

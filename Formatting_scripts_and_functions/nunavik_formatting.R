@@ -49,8 +49,9 @@ write.csv(interaction_df, "interactions_nunavik.csv", row.names=F)
 
 rm(list=ls())
 
-interaction_df <- read.csv("interactions_nunavik.csv", header=T)
+interaction_df <- read.csv("interactions_nunavik.csv", header=T, stringsAsFactors = FALSE)
 interaction_df <- interaction_df[!duplicated(interaction_df[,c('pred_scientific','prey_scientific')]),]
+interaction_df$prey_scientific[interaction_df$prey_scientific == "Branta canadensis "] <- "Branta canadensis"
 
 #taxonomy correction
 interaction_df$pred_scientific <- str_remove_all(interaction_df$pred_scientific, '\\s\\(.*\\)$')
@@ -65,9 +66,28 @@ which(pred_scientific_taxo_resolved$matched_name2!=pred_scientific_taxo_resolved
 prey_scientific_taxo_resolved <- gnr_resolve(prey_scientific_taxo, best_match_only = T, canonical = T)
 which(prey_scientific_taxo_resolved$matched_name2!=prey_scientific_taxo_resolved$submitted_name)
 prey_taxo_subset_resolved <- prey_scientific_taxo_resolved[c(which(prey_scientific_taxo_resolved$matched_name2!=prey_scientific_taxo_resolved$submitted_name)),]
+prey_scientific_taxo_resolved[c(207:208),5] <- c("Marine subsides", "Terrestrial subsides")
+dropped_mat_prey <- as.data.frame(matrix(nrow = length(attr(prey_scientific_taxo_resolved, "not_known")), ncol = 5))
+dropped_mat_prey[,1:2] <- attr(prey_scientific_taxo_resolved, "not_known")
+colnames(dropped_mat_prey) <- colnames(prey_scientific_taxo_resolved)
+prey_scientific_taxo_resolved <- rbind(prey_scientific_taxo_resolved, dropped_mat_prey)
+prey_scientific_taxo_resolved[209,5] <- "Bryophyta"
+prey_scientific_taxo_resolved[210,5] <- "Sedge"
+prey_scientific_taxo_resolved[211,5] <- "Poaceae"
+prey_scientific_taxo_resolved[212,5] <- "Forbs"
+prey_scientific_taxo_resolved[213,5] <- "Low shrubs"
+prey_scientific_taxo_resolved[214,5] <- "Erect shrubs"
+prey_scientific_taxo_resolved[215,5] <- "Trees"
+prey_scientific_taxo_resolved[216,5] <- "Aquatic subsides"
+
+
 
 interaction_df$pred_scientific <- pred_scientific_taxo_resolved$matched_name2[match(interaction_df$pred_scientific, pred_scientific_taxo_resolved$submitted_name)]
 interaction_df$prey_scientific <- prey_scientific_taxo_resolved$matched_name2[match(interaction_df$prey_scientific, prey_scientific_taxo_resolved$submitted_name)]
+
+#Checking if any species is NA
+sum(is.na(interaction_df$pred_scientific))
+sum(is.na(interaction_df$prey_scientific))
 
 #save it to .csv
 write.csv(interaction_df, "interactions_nunavik.csv", row.names=F)
