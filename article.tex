@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage{abstract}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[numbers]{natbib}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{csvsimple}
+\usepackage[onehalfspacing]{setspace}
+%\setlength{\parskip}{2em}
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*0}{*0}
+\titlespacing{\subsection}{0pt}{*0}{*0}
+
+
+\title{Réseaux écologiques et réseaux sociaux : étude comparée}
+\author{Benjamin Mercier\\
+        \\
+        \\
+        \\
+        Faculté des Sciences,\\
+        Département de Biologie,\\
+        Université de Sherbrooke
+       }
+\date{\today}
+\setlength{\parskip}{2em}
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+%Permet de mettre des lignes en haut et en bas de l'abstract
+\renewenvironment{abstract}
+{\begin{quote}
+\noindent \rule{\linewidth}{.5pt}\par{\bfseries \abstractname.}}
+{\medskip\noindent \rule{\linewidth}{.5pt}
+\end{quote}
+}
+
+\begin{center}
+    \begin{abstract}
+      Les propriétés des réseaux sont de plus en plus utilisées à travers une diversité de disciplines scientifiques pour décrire des systèmes complexes,
+      ce qui permet d’établir des parallèles intéressants entre l’organisation de systèmes à première vue complètement indépendants.
+      Afin d’investiguer la similitude de réseaux sociaux et écologiques, un réseau de collaboration d’élèves de troisième année de baccalauréat en écologie est
+      comparé à des réseaux trophiques. Le réseau total présente des caractéristiques des réseaux small-world, le rapprochant du réseau trophique observé dans
+      l’estuaire du Ythan. Le sous-ensemble représentant uniquement les membres de la cohorte se trouve davantage représenté par un petit système trophique
+       désertique par sa forte connectance.\\
+  \end{abstract}
+\end{center}
+
+
+\section{Introduction}
+
+\\
+
+
+
+\section{Méthode}
+
+\\
+
+
+\section{Résultats}
+
+
+
+
+
+
+%Insertion du tableau
+
+%\input{fichiers_nets/table_latex.tex}
+
+
+
+
+
+
+\pagebreak 
+
+
+\section{Discussion}
+
+
+\subsection*{Connectance des réseaux}
+
+
+\subsection*{Réseau complet}
+
+
+\subsection*{Réseau des noeuds majeurs}
+
+
+\section{Conclusion}
+
+\pagebreak
+
+%Le style unsrtnat est bien adapté à Natbib et met la bibliographie en ordre d'apparition dans le texte et non en ordre alphabétique
+\bibliographystyle{unsrtnat}
+\bibliography{ref}
+
+\end{document}
