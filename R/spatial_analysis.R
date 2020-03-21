@@ -2,6 +2,7 @@
 setwd("/home/benjamin/Documents/credits_recherche")
 library(sf)
 library(raster)
+library(rgdal)
 
 # Load the matrix and list of qc species to get their name and subset the range maps
 L_allQc <- readRDS("data/intermediate_object_results/matrix_inter_wide_all.RDS")
@@ -11,6 +12,10 @@ sp_L_allQc <- rownames(L_allQc)
 #sp_qc_list <- as.character(qc_list$scientific_name)
 
 #### SECTION FOR GLOBAL DOWNLOAD OF EACH TAXON ####
+ogrListLayers("data/range_maps/BOTW/BOTW.gdb")
+full_bird <- readOGR("data/range_maps/BOTW/BOTW.gdb", layer = "All_Species", require_geomType = "wkbPolygon")
+st_layers("data/range_maps/BOTW/BOTW.gdb")
+full_bird <- st_read("data/range_maps/BOTW/BOTW.gdb", layer = "ALl_Species", stringAsFactors = FALSE)
 full_amphi <- st_read("data/range_maps/AMPHIBIANS.shp", stringsAsFactors = FALSE )
 full_rept <- st_read("data/range_maps/REPTILES.shp", stringsAsFactors = FALSE)
 full_mamm <- st_read("data/range_maps/TERRESTRIAL_MAMMALS.shp", stringsAsFactors = FALSE)
@@ -20,29 +25,28 @@ full_mamm <- st_read("data/range_maps/TERRESTRIAL_MAMMALS.shp", stringsAsFactors
 # Subsetting the maps for the species that we have in Quebec (in our model)
 #amphibian
 sub_amphiQc <- full_amphi[which(full_amphi$binomial %in% sp_L_allQc),]
-#full_amphi_sub_qc_list_name <- unique(as.character(full_amphi_sub_qc_list$binomial))
 #reptilia
 sub_reptQc <- full_rept[which(full_rept$binomial %in% sp_L_allQc),]
-#full_rept_sub_qc_list_name <- unique(as.character(full_rept_sub_qc_list$binomial))
 #mammalia
 sub_mammQc <- full_mamm[which(full_mamm$binomial %in% sp_L_allQc),]
-#full_mamm_sub_qc_list_name <- unique(as.character(full_mamm_sub_qc_list$binomial))
-
 # Get all the taxon into one data frame
-all_sp <- plyr::rbind.fill(sub_amphiQc, sub_reptQc, sub_mammQc)
+all_sp <- rbind(sub_amphiQc,sub_reptQc,sub_mammQc)
+
+# Only keep presence=1 (means extant, 2=probably extent, 3=possibly extant, 4=possibly extinct)
+# Keep all the code for "Origin", (1=native, 2=reintroduced, 3=introduced, 4=vagrant, 5=origin uncertain, 6=assisted colinisation)
+# Keep all the code for "Seasonality", (1=resident, 2=breeding season, 3=non-breeding season, 4=passage, 5=seasonal occurence uncertain)
+all_sp <- all_sp[which(all_sp$presence == 1)]
 
 # Split the data frame into lists based on the binomial name. (some species had more than one geometry associated) SO going to merge these geometry together
-all_sp_list <- split(all_sp, f = all_sp$binomial)
+all_sp <- split(all_sp, f = all_sp$binomial)
+all_sp_raster <- lapply(all_sp, function(x) rasterize(x, rasterBase))
+#write_rds(all_sp_raster, "data/intermediate_object_results/all_sp_raster.RDS")
 
-# 
-all_sp_list <- map(all_sp_list, function(x) x[,28]) #%>%
-               map( ~raster(.x, resolution = c(0.01,0.01)))
 
-typeof(all_sp_list[1])
 
-test <- all_sp_list[[1]][,28]
-test <- st_combine(test)
-test <- raster(test, rasterBase)
+test <- raster::bind(all_sp[[1]])
+
+test <- st_union(all_sp[[1]])
 
 
 
@@ -51,50 +55,31 @@ test <- raster(test, rasterBase)
 
 
 
+dz_species_gdb@ftp.birdlife.org
+;[WgL;M{AW2l
 
 
-test <- raster(all_sp_list[[1]][1,28], resolution = c(0.01,0.01))
-test <- rasterize(all_sp_list[[1]][1,28], rasterBase)
 
 
 
+
+
+image(rasterQc)
+image(test, add = TRUE)
 # Load the Quebec map
 qc_map <- readRDS(file = "data/range_maps/Quebec_Labrador.RDS")
 # Construire un raster de référence
 rasterBase <-  raster(qc_map, resolution = c(0.01,0.01))
 # Transformer une carte en raster
 rasterQc <-  rasterize(qc_map, rasterBase)
+# Plot la carte du Qc
 plot(rasterQc, col = "cornsilk2", main = "Qc map")
-
-which(full_mamm_sub_qc_list$binomial == "Lepus americanus")
-okok <- full_mamm_sub_qc_list[which(full_mamm_sub_qc_list$binomial == "Lepus americanus"), "geometry"]
-okok1 <- raster(okok[1], resolution = c(0.01,0.01))
-okok1 <- rasterize(okok, rasterBase)
-okok2 <- stack(okok1)
-
-plot(rasterQc, col = "cornsilk2")
-plot(okok1, add = TRUE, col = rgb(0.146, 0.209, 0.87, 0.5))
-plot(okok2)
+# Ajouter la carte de l'sp1
+plot(test, add = TRUE, col = rgb(0.146, 0.209, 0.87, 0.5), asp = -1)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#okok1  <- fasterize(okok$geometry, rasterBase, field = NULL, fun = "sum")
 
 
 
