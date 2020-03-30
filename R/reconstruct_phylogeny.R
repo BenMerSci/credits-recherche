@@ -10,6 +10,8 @@ vect_name <- c()
 for(i in 1:length(taxo_rank)){
   if(nrow(as.data.frame(taxo_rank[i]))<2){vect_name <- append(vect_name, names(taxo_rank[i]))}
 } #Looks like there isn't any species for which we weren't able to rebuild their taxonomic hierarchy
+taxo_rank$Trees <- NA
+
 
 write_rds(taxo_rank, "data/intermediate_object_results/pred_phylogeny.RDS")
 

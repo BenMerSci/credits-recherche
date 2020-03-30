@@ -1,6 +1,7 @@
 #libraries
 library(stringr)
 library(taxize)
+library(plyr)
 library(tidyverse)
 library(vegan)
 rm(apg_families, apg_orders, rank_ref, theplantlist)
@@ -30,9 +31,9 @@ meta_network$prey_scientific <-  paste0(str_to_upper(str_extract(meta_network$pr
 
 
 #write it to .csv
-write.csv(meta_network, "data/intermediate_object_results/matrix_inter_long.csv", row.names = F)
+write_rds(meta_network, "data/intermediate_object_results/matrix_inter_long.RDS")
 rm(list=ls())
-meta_network <- read.csv("data/intermediate_object_results/matrix_inter_long.csv", header = T)
+meta_network <- readRDS("data/intermediate_object_results/matrix_inter_long.RDS")
 
 
 #Final correction for taxo too, to see if we have duplicate but written different
@@ -264,9 +265,89 @@ write_rds(meta_network, "data/intermediate_object_results/matrix_inter_long.RDS"
 rm(list=ls())
 meta_network <- readRDS("data/intermediate_object_results/matrix_inter_long.RDS")
 
+####################################################################################################################################################################
+##################### VERY CHAOTIC SECTION WHERE I COMBINE DIFFERENT BADLY RESOLVED TAXONOMY TOGETHER, TO MAKE TE NETWORK LESS BIG #################################
+####################################################################################################################################################################
+
+# Section to get the names of the species that are prey, to combine all trees, plants, invertebrates into more succinctcategories
+pred_name <- unique(meta_network$pred_scientific) # Get the predators' name
+prey_name <- unique(meta_network$prey_scientific) # Get the preys' name
+prey_name <- prey_name[-which(prey_name %in% pred_name)] # Get only the real preys
+#phylo_prey <- classification(prey_name, db = "gbif", rows = 1) # Get their phylogeny if possible
+#write_rds(phylo_prey, "data/intermediate_object_results/prey_classification.RDS")
+phylo_prey <- readRDS("data/intermediate_object_results/prey_classification.RDS")
+phylo_prey_list <- unclass(phylo_prey)
+
+# Plant section
+plantae <- phylo_prey_list[which(lapply(phylo_prey_list, function(x) which(x[[1]] == "Plantae")) == 1)]
+trees <- c("Corylus","Prunus","Alnus viridis crispa","Populus tremuloides","Picea mariana","Betula michauxii","Betula pumila","Pinus resinosa","Ulmus americana","Juglans cinerea","Betula alleghaniensis","Ostrya virginiana","Populus deltoides","Salix nigra","Amelanchier arborea","Acer pensylvanicum","Fraxinus nigra","Salix interior","Amelanchier","Alnus incana rugosa","Prunus pennsylvanica","Amelanchier bartramiana","Sorbus","Betula","Carya","Picea","Alnus sinuata","Pinus strobus","Ulmus rubra","Fagus grandifolia","Betula populifolia","Populus grandidentata","Salix rigida","Amelanchier laevis","Prunus pensylvanica","Sorbus decora","Acer saccharum","Populus","Abies balsamea","Betula papyrifera","Sorbus americana","Larix laricina","Acer","Fagus","Taxus canadensis","Thuja occidentalis","Alnus incana", "Tsuga canadensis","Carya cordiformis","Quercus macrocarpa","Populus alba","Salix bebbiana","Amelanchier sanguinea","Prunus serotina","Acer saccharinum","Salix discolor","Cornus","Quercus","Acer rubrum","Picea glauca","Acer spicatum","Alnus","Betula glandulosa","Salix pellita","Quercus rubra","Populus balsamifera","Salix gracilis","Prunus virginiana","Acer nigrum","Fraxinus americana","Salix petiolaris","Salix","Salix alba","Carya ovata","Trees") # add "Trees" to trees
+bryophyta <- plantae[which(lapply(plantae, function(x) which(x[2,] == "Bryophyta")) == 1)]
+hepatics <- plantae[which(lapply(plantae, function(x) which(x[2,] == "Marchantiophyta")) == 1)]
+lichens <- plantae[which(lapply(plantae, function(x) which(x[2,] == "Lichen")) == 1)]
+plantae_to_rm <- c(trees, names(bryophyta), names(hepatics), names(lichens))
+
+herbaceous <- which(names(plantae) %in% plantae_to_rm == F)
+herbaceous <- plantae[herbaceous]
+herbaceous <- c(names(herbaceous), "Forbs", "Sedge", "Low shrubs", "Erect shrubs")
+herbaceous <- herbaceous[-483]
+Bryophyta_hepatics_lichens <- c(names(bryophyta),names(hepatics),names(lichens), "Algae")
+
+# Animal section    # Add Oligochaeta to invertebrates, remove "Salix"
+animalia <- phylo_prey_list[which(lapply(phylo_prey_list, function(x) which(x[[1]] == "Animalia")) == 1)]
+# Chordata
+chordata <- animalia[which(lapply(animalia, function(x) which(x[2,] == "Chordata")) == 1)]
+
+fish <- animalia[which(lapply(animalia, function(x) which(x[3,] == "Actinopterygii")) == 1)]
+reptilia <- animalia[which(lapply(animalia, function(x) which(x[3,] == "Reptilia")) == 1)]
+aves <- animalia[which(lapply(animalia, function(x) which(x[3,] == "Aves")) == 1)]
+rodentia <- animalia[which(lapply(animalia, function(x) which(x[4,] == "Rodentia")) == 1)]
+
+chordata_to_rm <- c(names(fish), names(reptilia), names(aves), names(rodentia))
+chordata_to_rm <- which(names(chordata) %in% chordata_to_rm == F)
+chordata_to_rm <- chordata[chordata_to_rm] #Leaving them like that
+
+arthropoda <- animalia[which(lapply(animalia, function(x) which(x[2,] == "Arthropoda")) == 1)]
+
+animalia_to_rm <- c(names(fish), names(reptilia), names(aves), names(rodentia), names(chordata_to_rm), names(arthropoda))
+animalia_rest <- which(names(animalia) %in% animalia_to_rm == F)
+animalia_rest <- animalia[animalia_rest]
+invertebrates <- animalia_rest
+
+
+fish <- c(names(fish), "Pisces")
+reptilia <- c(names(reptilia), "Serpentes")
+invertebrates <- c(names(invertebrates), "Oligochaeta", "Invertebrata", "Pelecypods")
+invertebrates <- invertebrates[-c(14)]
+arthropoda <- c(names(arthropoda), "Crustacea", "Eufernoia stygica")
+arthropoda <- arthropoda[-c(31,50)]
+chordata_to_rm <- names(chordata_to_rm)
+chordata_to_rm <- chordata_to_rm[-c(6,35)]
+aves <- names(aves)
+aves <- aves[-c(8,16,17,18,22,23)]
+rodentia <- c(names(rodentia), "Marmotini")
+rodentia <- rodentia[-c(7,9,10,12,13,14)]
+
+# Fungi section
+fungi <- phylo_prey_list[which(lapply(phylo_prey_list, function(x) which(x[[1]] == "Fungi")) == 1)]
+fungi <- names(fungi)
+fungi <- fungi[-c(8)]
+
+# Names NA section
+names_na <- phylo_prey_list[which(is.na(phylo_prey_list))]
+names_na <- names(names_na)
+detritus <- names_na[c(2,4,5,13,14,15)]
+detritus <- c(detritus, "Carrion")
+
+rm(list=setdiff(ls(), c("trees","herbaceous","Bryophyta_hepatics_lichens","fish","reptilia","invertebrates","arthropoda","chordata_to_rm","aves","rodentia","fungi","detritus")))
+
+######################################################################################################################################################################
+######################################################################################################################################################################
+######################################################################################################################################################################
+
+meta_network <- readRDS("data/intermediate_object_results/matrix_inter_long.RDS")
 
 #Making the matrix a square matrix for the  base network (species that were already in the system)
-sp_names <- unique(c(meta_network$pred_scientific, meta_network$prey_scientific))
+sp_names <- unique(c(meta_network$pred_scientific, meta_network$prey_scientific)) 
 L <- expand.grid(sp_names, sp_names, stringsAsFactors = FALSE)
 L <- L[,c(2,1)]
 colnames(L) <- c("pred_scientific","prey_scientific")
@@ -279,6 +360,165 @@ L <- spread(L, prey_scientific, interaction)
 rownames(L) <- L[,1]
 L <- L[,-1]
 L <- as.matrix(L)
+
+# Grouping Arthropoda
+L_arthropoda_col <- L[,arthropoda]
+L_arthropoda_col_na <- which(rowSums(is.na(L_arthropoda_col)) == ncol(L_arthropoda_col))
+arthropoda_col <- apply(L_arthropoda_col, 1, function(x) sum(x, na.rm = TRUE))
+arthropoda_col[L_arthropoda_col_na] <- NA
+L_arthropoda_row <- L[arthropoda,]
+L_arthropoda_row_na <- which(colSums(is.na(L_arthropoda_row)) == nrow(L_arthropoda_row))
+arthropoda_row <- apply(L_arthropoda_row, 2, function(x) sum(x, na.rm= TRUE))
+arthropoda_row[L_arthropoda_row_na] <- NA
+# L <- L[!row.names(L) %in% arthropoda,]
+# L <- L[,!colnames(L) %in% arthropoda]
+# Grouping aves
+L_aves_col <- L[,aves]
+L_aves_col_na <- which(rowSums(is.na(L_aves_col)) == ncol(L_aves_col))
+aves_col <- apply(L_aves_col, 1, function(x) sum(x, na.rm = TRUE))
+aves_col[L_aves_col_na] <- NA
+L_aves_row <- L[aves,]
+L_aves_row_na <- which(colSums(is.na(L_aves_row)) == nrow(L_aves_row))
+aves_row <- apply(L_aves_row, 2, function(x) sum(x, na.rm= TRUE))
+aves_row[L_aves_row_na] <- NA
+# L <- L[!row.names(L) %in% aves,]
+# L <- L[,!colnames(L) %in% aves]
+# Grouping Bryophyta_hepatics_lichens
+L_Bryophyta_hepatics_lichens_col <- L[,Bryophyta_hepatics_lichens]
+L_Bryophyta_hepatics_lichens_col_na <- which(rowSums(is.na(L_Bryophyta_hepatics_lichens_col)) == ncol(L_Bryophyta_hepatics_lichens_col))
+Bryophyta_hepatics_lichens_col <- apply(L_Bryophyta_hepatics_lichens_col, 1, function(x) sum(x, na.rm = TRUE))
+Bryophyta_hepatics_lichens_col[L_Bryophyta_hepatics_lichens_col_na] <- NA
+L_Bryophyta_hepatics_lichens_row <- L[Bryophyta_hepatics_lichens,]
+L_Bryophyta_hepatics_lichens_row_na <- which(colSums(is.na(L_Bryophyta_hepatics_lichens_row)) == nrow(L_Bryophyta_hepatics_lichens_row))
+Bryophyta_hepatics_lichens_row <- apply(L_Bryophyta_hepatics_lichens_row, 2, function(x) sum(x, na.rm= TRUE))
+Bryophyta_hepatics_lichens_row[L_Bryophyta_hepatics_lichens_row_na] <- NA
+# L <- L[!row.names(L) %in% Bryophyta_hepatics_lichens,]
+# L <- L[,!colnames(L) %in% Bryophyta_hepatics_lichens]
+# Grouping detritus
+L_detritus_col <- L[,detritus]
+L_detritus_col_na <- which(rowSums(is.na(L_detritus_col)) == ncol(L_detritus_col))
+detritus_col <- apply(L_detritus_col, 1, function(x) sum(x, na.rm = TRUE))
+detritus_col[L_detritus_col_na] <- NA
+L_detritus_row <- L[detritus,]
+L_detritus_row_na <- which(colSums(is.na(L_detritus_row)) == nrow(L_detritus_row))
+detritus_row <- apply(L_detritus_row, 2, function(x) sum(x, na.rm= TRUE))
+detritus_row[L_detritus_row_na] <- NA
+# L <- L[!row.names(L) %in% detritus,]
+# L <- L[,!colnames(L) %in% detritus]
+# Grouping fish
+L_fish_col <- L[,fish]
+L_fish_col_na <- which(rowSums(is.na(L_fish_col)) == ncol(L_fish_col))
+fish_col <- apply(L_fish_col, 1, function(x) sum(x, na.rm = TRUE))
+fish_col[L_fish_col_na] <- NA
+L_fish_row <- L[fish,]
+L_fish_row_na <- which(colSums(is.na(L_fish_row)) == nrow(L_fish_row))
+fish_row <- apply(L_fish_row, 2, function(x) sum(x, na.rm= TRUE))
+fish_row[L_fish_row_na] <- NA
+# L <- L[!row.names(L) %in% fish,]
+# L <- L[,!colnames(L) %in% fish]
+# Grouping fungi
+L_fungi_col <- L[,fungi]
+L_fungi_col_na <- which(rowSums(is.na(L_fungi_col)) == ncol(L_fungi_col))
+fungi_col <- apply(L_fungi_col, 1, function(x) sum(x, na.rm = TRUE))
+fungi_col[L_fungi_col_na] <- NA
+L_fungi_row <- L[fungi,]
+L_fungi_row_na <- which(colSums(is.na(L_fungi_row)) == nrow(L_fungi_row))
+fungi_row <- apply(L_fungi_row, 2, function(x) sum(x, na.rm= TRUE))
+fungi_row[L_fungi_row_na] <- NA
+# L <- L[!row.names(L) %in% fungi,]
+# L <- L[,!colnames(L) %in% fungi]
+# Grouping herbaceous
+L_herbaceous_col <- L[,herbaceous]
+L_herbaceous_col_na <- which(rowSums(is.na(L_herbaceous_col)) == ncol(L_herbaceous_col))
+herbaceous_col <- apply(L_herbaceous_col, 1, function(x) sum(x, na.rm = TRUE))
+herbaceous_col[L_herbaceous_col_na] <- NA
+L_herbaceous_row <- L[herbaceous,]
+L_herbaceous_row_na <- which(colSums(is.na(L_herbaceous_row)) == nrow(L_herbaceous_row))
+herbaceous_row <- apply(L_herbaceous_row, 2, function(x) sum(x, na.rm= TRUE))
+herbaceous_row[L_herbaceous_row_na] <- NA
+# L <- L[!row.names(L) %in% herbaceous,]
+# L <- L[,!colnames(L) %in% herbaceous]
+# Grouping invertebrates
+L_invertebrates_col <- L[,invertebrates]
+L_invertebrates_col_na <- which(rowSums(is.na(L_invertebrates_col)) == ncol(L_invertebrates_col))
+invertebrates_col <- apply(L_invertebrates_col, 1, function(x) sum(x, na.rm = TRUE))
+invertebrates_col[L_invertebrates_col_na] <- NA
+L_invertebrates_row <- L[invertebrates,]
+L_invertebrates_row_na <- which(colSums(is.na(L_invertebrates_row)) == nrow(L_invertebrates_row))
+invertebrates_row <- apply(L_invertebrates_row, 2, function(x) sum(x, na.rm= TRUE))
+invertebrates_row[L_invertebrates_row_na] <- NA
+# L <- L[!row.names(L) %in% invertebrates,]
+# L <- L[,!colnames(L) %in% invertebrates]
+# Grouping reptilia
+L_reptilia_col <- L[,reptilia]
+L_reptilia_col_na <- which(rowSums(is.na(L_reptilia_col)) == ncol(L_reptilia_col))
+reptilia_col <- apply(L_reptilia_col, 1, function(x) sum(x, na.rm = TRUE))
+reptilia_col[L_reptilia_col_na] <- NA
+L_reptilia_row <- L[reptilia,]
+L_reptilia_row_na <- which(colSums(is.na(L_reptilia_row)) == nrow(L_reptilia_row))
+reptilia_row <- apply(L_reptilia_row, 2, function(x) sum(x, na.rm= TRUE))
+reptilia_row[L_reptilia_row_na] <- NA
+# L <- L[!row.names(L) %in% reptilia,]
+# L <- L[,!colnames(L) %in% reptilia]
+# Grouping rodentia
+L_rodentia_col <- L[,rodentia]
+L_rodentia_col_na <- which(rowSums(is.na(L_rodentia_col)) == ncol(L_rodentia_col))
+rodentia_col <- apply(L_rodentia_col, 1, function(x) sum(x, na.rm = TRUE))
+rodentia_col[L_rodentia_col_na] <- NA
+L_rodentia_row <- L[rodentia,]
+L_rodentia_row_na <- which(colSums(is.na(L_rodentia_row)) == nrow(L_rodentia_row))
+rodentia_row <- apply(L_rodentia_row, 2, function(x) sum(x, na.rm= TRUE))
+rodentia_row[L_rodentia_row_na] <- NA
+# L <- L[!row.names(L) %in% rodentia,]
+# L <- L[,!colnames(L) %in% rodentia]
+# Grouping trees
+L_trees_col <- L[,trees]
+L_trees_col_na <- which(rowSums(is.na(L_trees_col)) == ncol(L_trees_col))
+trees_col <- apply(L_trees_col, 1, function(x) sum(x, na.rm = TRUE))
+trees_col[L_trees_col_na] <- NA
+L_trees_row <- L[trees,]
+L_trees_row_na <- which(colSums(is.na(L_trees_row)) == nrow(L_trees_row))
+trees_row <- apply(L_trees_row, 2, function(x) sum(x, na.rm= TRUE))
+trees_row[L_trees_row_na] <- NA
+# L <- L[!row.names(L) %in% trees,]
+# L <- L[,!colnames(L) %in% trees]
+
+# rbind and cbind the new groups
+L <- as.data.frame(L)
+L_colnames <- colnames(L)
+L <- cbind(L,arthropoda_col,aves_col,Bryophyta_hepatics_lichens_col,detritus_col,fish_col,fungi_col,herbaceous_col,invertebrates_col,reptilia_col,rodentia_col,trees_col)
+temp_mat <- as.data.frame(t(cbind(arthropoda_row,aves_row,Bryophyta_hepatics_lichens_row,detritus_row,fish_row,fungi_row,herbaceous_row,invertebrates_row,reptilia_row,rodentia_row,trees_row)))
+L <- rbind.fill(L, temp_mat)
+rownames(L) <- colnames(L)
+
+L <- L[!row.names(L) %in% arthropoda,]
+L <- L[,!colnames(L) %in% arthropoda]
+L <- L[!row.names(L) %in% aves,]
+L <- L[,!colnames(L) %in% aves]
+L <- L[!row.names(L) %in% Bryophyta_hepatics_lichens,]
+L <- L[,!colnames(L) %in% Bryophyta_hepatics_lichens]
+L <- L[!row.names(L) %in% detritus,]
+L <- L[,!colnames(L) %in% detritus]
+L <- L[!row.names(L) %in% fish,]
+L <- L[,!colnames(L) %in% fish]
+L <- L[!row.names(L) %in% fungi,]
+L <- L[,!colnames(L) %in% fungi]
+L <- L[!row.names(L) %in% herbaceous,]
+L <- L[,!colnames(L) %in% herbaceous]
+L <- L[!row.names(L) %in% invertebrates,]
+L <- L[,!colnames(L) %in% invertebrates]
+L <- L[!row.names(L) %in% reptilia,]
+L <- L[,!colnames(L) %in% reptilia]
+L <- L[!row.names(L) %in% rodentia,]
+L <- L[,!colnames(L) %in% rodentia]
+L <- L[!row.names(L) %in% trees,]
+L <- L[,!colnames(L) %in% trees]
+
+View(colnames(L))
+L <- rename(L, c("arthropoda_col"="Arthropoda","aves_col"="Aves","Bryophyta_hepatics_lichens_col"="Bryophyta","detritus_col"="Detritus","fish_col"="Fish","fungi_col"="Fungi","herbaceous_col"="Herbaceous","invertebrates_col"="Invertebrates","reptilia_col"="Reptilia","rodentia_col"="Rodentia","trees_col"="Trees"))
+rownames(L) <- colnames(L)
+L[L > 1 ] <- 1
+
 write_rds(L, "data/intermediate_object_results/matrix_inter_wide.RDS")
 rm(list=setdiff(ls(), "L"))
 

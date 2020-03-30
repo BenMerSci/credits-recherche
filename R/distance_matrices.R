@@ -23,12 +23,20 @@ Dist_mat_phylo <- as.matrix((taxa2dist(pred_phylogeny))/100)
 # Calculate the interaction distances, that are already between [0,1]
 Dist_mat_inter <- as.matrix(vegdist(L, method = "jaccard", na.rm = TRUE))
 
-D <- matrix(nrow = nrow(L), ncol = ncol(L))
 # Put the two distances together
-for(i in 1:nrow(L)){
-  if(sum(is.na(L[i,])) == ncol(L)) {D[i,] <- ((0*Dist_mat_inter[i,])+(1*Dist_mat_phylo[i,]))}
-  else{D[i,] <- ((0.8*Dist_mat_inter[i,])+(0.2*Dist_mat_phylo[i,]))}
-}
+# This little  loop doesnt work, beacause of the NAs
+# for(i in 1:nrow(L)){
+#   if(sum(is.na(L[i,])) == ncol(L)) {D[i,] <- ((0*Dist_mat_inter[i,])+(1*Dist_mat_phylo[i,]))}
+#   else{D[i,] <- ((0.8*Dist_mat_inter[i,])+(0.2*Dist_mat_phylo[i,]))}
+# }
+# positions of the matrix with NA
+indexNA_L <- which(is.na(L))
+# Matrix of result (empty with NA)
+D <- matrix(nrow = nrow(L), ncol = ncol(L))
+# When mInter == NA: (0 * matrice dist_interaction) + (1 * matrice_dist_phylogénie)
+D[indexNA_L] <- Dist_mat_phylo[indexNA_L]
+# When mInter != NA: (0,8 * matrice dist_interaction) + (0,2 * matrice dist_phylogénie)
+D[-indexNA_L] <- mapply(sum, (Dist_mat_inter[-indexNA_L] * 0.8), (Dist_mat_phylo[-indexNA_L] * 0.2), na.rm = FALSE)
 
 rownames(D) <- rownames(L)
 colnames(D) <- colnames(L)
@@ -57,13 +65,13 @@ Dist_mat_phylo_allQc <- as.matrix((taxa2dist(pred_phylogeny_miss))/100)
 Dist_mat_inter_allQc <- as.matrix(vegdist(L_allQc, method = "jaccard", na.rm = TRUE))
 
 # positions of the matrix with NA
-indexNA <- which(is.na(L_allQc))
+indexNA_allQc <- which(is.na(L_allQc))
 # Matrix of result (empty with NA)
 D_allQc <- matrix(nrow = nrow(L_allQc), ncol = ncol(L_allQc))
 # When mInter == NA: (0 * matrice dist_interaction) + (1 * matrice_dist_phylogénie)
-D_allQc[indexNA] <- Dist_mat_phylo_allQc[indexNA]
+D_allQc[indexNA_allQc] <- Dist_mat_phylo_allQc[indexNA_allQc]
 # When mInter != NA: (0,8 * matrice dist_interaction) + (0,2 * matrice dist_phylogénie)
-D_allQc[-indexNA] <- mapply(sum, (Dist_mat_inter_allQc[-indexNA] * 0.8), (Dist_mat_phylo_allQc[-indexNA] * 0.2), na.rm = TRUE)
+D_allQc[-indexNA_allQc] <- mapply(sum, (Dist_mat_inter_allQc[-indexNA_allQc] * 0.8), (Dist_mat_phylo_allQc[-indexNA_allQc] * 0.2), na.rm = FALSE)
 
 
 rownames(D_allQc) <- rownames(L_allQc)

@@ -5,7 +5,6 @@ setwd("/home/benjamin/Documents/credits_recherche") #Set my working directory
 library(vegan) #library vegan needed for vegdist()
 library(plyr)
 library(tidyverse)
-library(purrr)
 library(taxize)
 rm(apg_families, apg_orders, theplantlist, rank_ref)
 
@@ -78,15 +77,23 @@ for(i in 1:length(target_list)){ #for loop, that will go through each element of
 infered_matrix <- do.call(rbind, (lapply(target_list, function(x) x[1,])))
 #test <- matrix(infered_matrix)
 #test <- do.call(rbind, (lapply(matrix(infered_matrix), function(x) x)))
-
 return(infered_matrix)
 }
 
-system.time(infered_matrix_metanetwork <- knn_algo(L, D, k = 5))
-system.time(infered_matrix_allQc <- knn_algo(L_allQc, D_allQc, k = 5))
+system.time(infered_matrix_metanetwork_k3 <- knn_algo(L, D, k = 3))
+system.time(infered_matrix_metanetwork_k4 <- knn_algo(L, D, k = 4))
+system.time(infered_matrix_metanetwork_k5 <- knn_algo(L, D, k = 5))
+system.time(infered_matrix_metanetwork_k6 <- knn_algo(L, D, k = 6))
+system.time(infered_matrix_metanetwork_k7 <- knn_algo(L, D, k = 7))
 
-write_rds(infered_matrix_metanetwork, "data/intermediate_object_results/infered_matrix_metanetwork.RDS")
-write_rds(infered_matrix_allQc, "data/intermediate_object_results/infered_matrix_allQc.RDS")
+system.time(infered_matrix_allQc_k3 <- knn_algo(L_allQc, D_allQc, k = 3))
+system.time(infered_matrix_allQc_k4 <- knn_algo(L_allQc, D_allQc, k = 4))
+system.time(infered_matrix_allQc_k5 <- knn_algo(L_allQc, D_allQc, k = 5))
+system.time(infered_matrix_allQc_k6 <- knn_algo(L_allQc, D_allQc, k = 6))
+system.time(infered_matrix_allQc_k7 <- knn_algo(L_allQc, D_allQc, k = 7))
+
+write_rds(infered_matrix_metanetwork_k5, "data/intermediate_object_results/infered_matrix_metanetwork_k5.RDS")
+write_rds(infered_matrix_allQc_k5, "data/intermediate_object_results/infered_matrix_allQc_k5.RDS")
 rm(list=ls())
 
    
