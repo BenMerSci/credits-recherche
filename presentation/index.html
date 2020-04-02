@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/academicons-1.8.1/css/academicons.min.css">
+    <link rel="stylesheet" href="conf/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="conf/css/fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: middle, title-slide
+
+# L&amp;#39;écologie computationnelle
+
+## Réseaux trophiques des vertébrés terrestres du Québec
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+### Benjamin Mercier, &lt;br&gt; .small[Étudiant au BSc en écologie]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;i class="fa fa-github fa-2x" style="color:#335049"&gt;&lt;/i&gt; [BenMerSci/CVM_presentation](https://github.com/BenMerSci/CVM_talk)
+
+&lt;i class="fa fa-twitter fa-2x" style="color:#335049"&gt;&lt;/i&gt; 
+[@BenMerSci](https://twitter.com/BenMerSci)
+
+---
+
+class: 
+# Déroulement de la présentation &lt;hr/&gt;
+
+ 1. Mon cheminement
+&lt;br&gt;&lt;br&gt;
+ 2. Qu'est-ce que l'écologie computationnelle ?
+&lt;br&gt;&lt;br&gt;
+ 3. Présentation du projet de recherche
+
+.bottom[
+.right[
+![:scale 38%](images/draw_pres.png)
+]
+]
+.tiny[.cite[Icon made by SmartLine from www.flaticon.com]]
+
+---
+
+class: inverse, middle, center
+# Mon cheminement
+
+---
+
+# Mon cheminement &lt;hr/&gt;
+### Cégep du Vieux Montréal .tiny[(2013-2016)]
+- Pré-universitaire en Sciences de la nature
+
+### Université de Sherbrooke .tiny[(2016-2020)]
+- Baccalauréat en écologie
+&lt;h2&gt;
+- Microprogramme en écologie pratique
+&lt;h2&gt;
+- Divers stages en milieu académique (recherche)
+
+.middle[
+.right[
+![:scale 40%](images/cheminement.png)
+]
+]
+
+---
+
+class: inverse, middle, center
+#Qu'est-ce que l'écologie computationnelle?
+
+---
+
+# Historique &lt;hr/&gt;
+.pull-left[
+- Longtemps une discipline descriptive et conceptuelle
+&lt;h2&gt;
+- Développement et application de statistiques (1930)
+&lt;h2&gt;
+- Développement et applications de théories mathématiques (1960)
+&lt;h2&gt;
+- Expériences terrains coûteuses et laborieuses
+&lt;h2&gt;
+- Accumulation massive de données et meilleurs ordinateurs
+
+]
+.pull-right[
+![:scale 90%](images/detective_eco.png)
+]
+
+---
+
+# Définition &lt;hr/&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[ 
+.Large[***"L'utilisation combinée d'algorithmes, de programmes et de bonnes pratiques de gestion de données dans le but de résoudre des problèmes complexes." ***]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+**L'écologie computationnelle est donc l'application de ces outils à des problèmes écologiques complexes**
+]
+.tiny[.cite[Poisot, T., LaBrie, R., Larson, E., Rahlin, A., &amp; Simmons, B. I. [2019.](https://pdfs.semanticscholar.org/0e7b/c4ce649a00edeb110bec864ccfd7c003ce7a.pdf), IEE.]]
+
+---
+
+# Quelques exemples d'application &lt;hr/&gt;
+###1) Modélisation de la migration de la forêt
+- État initial de chaque parcelle de la forêt (T, B, M, R) &lt;h2&gt;
+- Probabilité de changer d'état selon l'environnement et ses "voisins"
+.center[
+.bottom[
+![:scale 80%](images/foret.png)
+]
+]
+
+---
+
+# Quelques exemples d'application &lt;hr/&gt;
+###1) Modélisation de la migration de la forêt
+.center[
+![:scale 90%](images/RCP8.5.gif)
+]
+&lt;br&gt;&lt;br&gt;
+.tiny[.cite[Vissault, S. [2016.](http://semaphore.uqar.ca/1266/) Diss. Université du Québec à Rimouski]]
+
+---
+
+# Quelques exemples d'application &lt;hr/&gt;
+###2) Les écosystèmes marins
+- Impossible d'échantillonner les réseaux marins empiriquement
+&lt;h2&gt;
+- Reconstituer les interactions en combinant des données massives et certaines suppositions
+.middle[
+.center[
+![:scale 80%](images/Albouy_schema.svg)
+]
+]
+.tiny[.cite[Albouy, C. et al. [2019.](https://www.nature.com/articles/s41559-019-0950-y) Nature ecology &amp; evolution, .3(8), 1153-1161.]]
+
+---
+
+class: inverse, middle, center
+#Reconstitution des réseaux trophiques des vertébrés terrestres
+
+---
+
+# Tables des matières &lt;hr/&gt;
+
+.pull-left[ 
+1) Préambule &lt;br&gt;&lt;br&gt;
+2) Théorie sous-jacente  &lt;br&gt;&lt;br&gt;
+3) Objectifs et hypothèse &lt;br&gt;&lt;br&gt;
+4) Méthodologie &lt;br&gt;&lt;br&gt;
+5) Bibliographie &lt;br&gt;&lt;br&gt;
+]
+
+---
+
+# Préambule &lt;hr/&gt;
+## Écologie
+.large[**Définition:**]
+&lt;br&gt;&lt;br&gt;
+.center[
+.Large[
+***L'Étude des organismes vivants dans leur environnement; les interactions avec les paramètres biotiques et abiotiques.***
+]
+]
+&lt;br&gt;&lt;br&gt;
+**.center[.large[La représentation en réseau de ce type de système permet d'interpreter la diffusion des perturbations]]**
+---
+
+# Préambule &lt;hr/&gt;
+## Réseau trophique
+.center[![:scale 85%](images/trophic_network.png)]
+.tiny[.cite[https://lamaisondalzaz.wordpress.com/la-foret-son-role-vu-par-les-citoyens/la-foret-de-la-chaine-alimentaire-au-transfert-de-matiere/]]
+
+---
+
+# Préambule (suite) &lt;hr/&gt;
+## Services écosystémiques
+- Services écosystémiques découlent des interactions présentent dans les réseaux trophiques [1, 2, 3]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.pull-left[![:scale 110%](images/polinisation.png)]
+.pull-right[![:scale 105%](images/detritivore.png)]
+
+---
+
+# Préambule &lt;hr/&gt;
+## Cascade trophique
+
+.pull-left[
+
+&lt;br&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;**changements globaux**
+&lt;br&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; .Large[&amp;darr;]
+&lt;br&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Perte de gros organismes et &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;cascasdes trophiques [3, 4, 5]
+]
+.pull-right[
+![:scale 120%](images/trophic-cascade.svg.png)
+]
+.tiny[.cite[https://www.tes.com/lessons/_gRvCApIQBLPWg/aaa-biodiversity-trophic-cascades]]
+
+---
+
+# Préambule (suite) &lt;hr/&gt;
+## Enveloppe climatique
+- Conditions environnementales optimales pour prospérer
+- Migration et déplacement/modification des réseaux trophiques
+.center[![:scale 60%](images/climatic_envelop.png)]
+
+---
+
+# Préambule (suite) &lt;hr/&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.Large[**Il est donc primordiale d'exposer la structure de base de nos présents réseaux écologiques pour en prévoir les variations et conséquences associées!**]]
+
+---
+
+# Théorie &lt;hr/&gt;
+## La niche écologique
+- Disitribution spatiale dépend de l'environnement [6]
+&lt;h2&gt;
+- Quantification de cette niche selon Hutchinson [7]
+&lt;h2&gt;
+- Chaque variable environnementale est un axe &amp;rarr; ***hypervolume***
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.Large[***Ceci est la niche écologique fondamentale***]]
+
+---
+
+# Théorie (suite) &lt;hr/&gt;
+## La niche écologique
+
+![:scale 100%](images/figure1.PNG)
+
+.center[***Représentation 2D (A) et 3D (B) de la niche fondamentale***]
+
+---
+
+# Théorie (suite) &lt;hr/&gt;
+## La niche écologique 
+- Intrégrer l'effet d'autres espèces
+&lt;h2&gt;
+- Modification de "l'hypervolume"
+&lt;h2&gt;
+- Variation spatiale et temporelle possible de la niche
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.Large[***Ceci est la niche écologique réalisée***]]
+
+---
+
+# Théorie (suite) &lt;hr/&gt;
+## La niche d'interactions 
+- Disitribution spatiale dépend des interactions biotiques [8]
+&lt;br&gt;&lt;br&gt;
+- Interactions nécessitent une correspondance de caractéristiques &lt;br&gt;&lt;br&gt;
+  **exemple:** ouverture de bouche suffisament large pour une grosse proie
+  &lt;h2&gt;
+
+---
+
+# Théorie (suite) &lt;hr/&gt;
+## La niche intégrée
+.pull-left[
+- Combinaison de la niche écologique et de la niche d'interactions
+&lt;h2&gt;
+- Distribution spatiale dépend de l'environnement et des interactions biotiques
+]
+.pull-right[![:scale 80%](images/niche_integ.png)]
+.tiny[.cite[Adapté de : Gravel, D., Baiser, B., Dunne, J. A., Kopelke, J. P., Martinez, N. D., Nyman, T., ... &amp; Roslin, T. [2019.](https://onlinelibrary.wiley.com/doi/full/10.1111/ecog.04006)  Ecography.]]
+
+---
+
+# Théorie (suite) &lt;hr/&gt;
+## Limites taxonomiques respectives
+### Mammifères
+- Équilibre énergétique pour la chaleur corporelle [9]
+&lt;h2&gt;
+- Effets variables des microconditions environnementales [10]
+
+### Oiseaux
+- Équilibre énergétique pour la chaleur corporelle
+&lt;h2&gt;
+- Structure verticale de l'environnement [11, 12, 13]
+
+---
+
+# Théorie (suite) &lt;hr/&gt;
+## Limites taxonomiques respectives
+### Amphibiens
+- Température [14]
+- Disponibilité de l'eau [15, 16]
+
+### Reptiles
+- Température [16]
+- Disponibilité de l'eau [16]
+
+---
+
+# Objectifs et hypothèse &lt;hr/&gt;
+## Objectifs
+- Reconstituer le réseau trophique des vertébrés terrestres
+&lt;h2&gt;
+- Illustrer spatialement ces réseaux sur le territoire du Québec
+&lt;h2&gt;
+- Comprendre ce qui structure ces différents réseaux
+
+## Hypothèse
+- La complexité des réseaux trophiques diminuera à l'écotone entre la forêt boréale et la tundra.
+
+---
+  
+# Méthodologie &lt;hr/&gt;
+.pull-left[
+1. Regrouper et formatter les données de bases en un méta-réseau
+&lt;h2&gt;
+2. Reconstituer les réseaux trophiques
+&lt;h2&gt;
+3. Illustrer spatialement les réseaux sur le territoire du Québec
+&lt;h2&gt;
+4. Analyse des caractéristiques du réseau
+]
+.pull-right[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+![:scale 100%](images/metho_image.png)
+]
+.tiny[.cite[Adapted, icon made by Freepik from www.flaticon.com]]
+
+---
+
+# Méthodologie &lt;hr/&gt;
+## Regrouper et formatter les données de base
+- Jeux de données représentatifs de l'ensemble du Québec
+&lt;h2&gt;
+- Formatage essentiel des données
+&lt;h2&gt;
+- Résulte en un méta-réseau
+.center[![:scale 60%](https://media.giphy.com/media/bPCwGUF2sKjyE/source.gif)]
+
+---
+
+# Méthodologie &lt;hr/&gt;
+## Regrouper et formatter les données de base
+- Jeux de données représentatifs de l'ensemble du Québec
+&lt;h2&gt;
+- Formatage essentiel des données
+&lt;h2&gt;
+- Résulte en un méta-réseau
+
+---
+
+# Méthodologie &lt;hr/&gt;
+## Reconstituer le méta-réseau avec l'algorithme KNN
+- **KNN:** K plus proches voisins (K-Nearest-Neighbor)
+- Nécessite initialement une matrice d'interaction 
+.center[![:scale 105%](images/subset_mat_inter.png)]
+&lt;br&gt;
+
+---
+
+# Méthodologie &lt;hr/&gt;
+## Reconstituer le méta-réseau avec l'algorithme KNN
+.pull-left[- Même principe que les propositions Netflix, Amazon et Youtube]
+.center[![:scale 55%](images/algo_knn.png)]
+.tiny[.cite[Desjardins-Proulx, P., Laigle, I., Poisot, T., &amp; Gravel, D. [2017.](https://peerj.com/articles/3644/) PeerJ, 5, e3644.]]
+---
+
+# Méthodologie &lt;hr/&gt;
+## Reconstituer le méta-réseau avec l'algorithme KNN
+- Mesure de distance entre chaque paire d'espèces
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+`$$Jaccard_d = \frac{a}{(a+b+c)}$$`
+.pull-right[![:scale 60%](images/jaccard_mat.png)]
+
+---
+
+# Méthodologie &lt;hr/&gt;
+## Illustrer spatialement le méta-réseau
+
+- Se procurer les cartes de distribution d'espèce
+&lt;h2&gt;
+- Transformer la carte en grille
+&lt;h2&gt;
+- Limiter les interactions avec les co-occurences d'espèces
+
+---
+
+# Méthodologie &lt;hr/&gt;
+## Illustrer spatialement le méta-réseau
+.pull-left[![:scale 137%](images/faible_reso.png)]
+.pull-right[![:scale 140%](images/haute_reso.png)]
+
+---
+# Méthodologie &lt;hr/&gt;
+## Illustrer spatialement le méta-réseau
+
+.pull-left[![:scale 110%](images/coyote_lievre_real.png)]
+.pull-right[![:scale 110%](images/cerf_coyote_real.png)]
+
+---
+
+# Méthodologie &lt;hr/&gt;
+## Analyse des caractéristiques du réseau
+- Nombre d'espèces (S)
+&lt;h2&gt;
+- Nombre de liens (L)
+&lt;h2&gt;
+- Connectance (L/S²)
+&lt;h2&gt;
+- Modularité
+.pull-right[![:scale 80%](images/burgess_shale.png)]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.large[**Explorer la variation de ces caractéristiques sur l'ensemble du territoire du Québec**]]
+.tiny[.cite[Dunne, J. A., Williams, R. J., Martinez, N. D., Wood, R. A., &amp; Erwin, D. H. [2008.](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060102) PLoS biology, 6(4).]]
+
+---
+
+# Utilité ? &lt;hr/&gt;
+
+- Exposer une structure initial en guise de référence
+&lt;h2&gt;
+- Parler de biodiversité (changements climatiques abordés 8x plus)
+&lt;h2&gt;
+- Pourquoi pas?
+
+.tiny[.cite[Legagneux, P., Casajus, N., Cazelles, K., Chevallier, C., Chevrinais, M., Guéry, L., ... &amp; Ropars, P. [2018.](https://www.frontiersin.org/articles/10.3389/fevo.2017.00175/full?source=post_page---------------------------) Frontiers in Ecology and Evolution, 5, 175.]]
+---
+
+# Bibliographie &lt;hr/&gt;
+
+.tiny[ 
+1. Daily, G. C., S. Alexander, P. R. Ehrlich, L. Goulder, P. A. Matson, H. A. Mooney, S. Postel, H. Schneider, D. Tilman &amp; G. M. Woodwell, 1997. Ecosystem services: Benefits Supplied to Human Societies by Natural Ecosystems. Ecological Society of America: 21.
+2. Duffy, J. E., 2009. Why biodiversity is important to the functioning of real-world ecosystems. Frontiers in Ecology and the Environment, 7: 437–444.
+3. Jordano, P., 2016. Chasing Ecological Interactions. PLOS Biology, 14: e1002559.
+4. Estes, J. A., J. Terborgh, J. S. Brashares, M. E. Power, J. Berger, W. J. Bond, S. R. Carpenter, T. E. Essington, R. D. Holt, J. B. C. Jackson, R. J. Marquis, L. Oksanen, T. Oksanen, R. T. Paine, E. K. Pikitch, W. J. Ripple, S. A. Sandin, M. Scheffer, T. W. Schoener, J. B. Shurin, A. R. E. Sinclair, M. E. Soulé, R. Virtanen &amp; D. A. Wardle, 2011. Trophic Downgrading of Planet Earth. Science, 333: 301–306.
+5. Montoya, J. M. &amp; D. Raffaelli, 2010. Climate change, biotic interactions and ecosystem services. Philosophical Transactions of the Royal Society B: Biological Sciences, 365: 2013–2018.
+6. Grinnell, J., 1917. The Niche-Relationships of the California Thrasher. The Auk, 34: 427–433.
+7. Hutchinson, G. E., 1957. Concluding Remarks. Cold Spring Harbor Symposia on Quantitative Biology, 22: 415–427.
+8. Elton, C. S. (Charles S., 1927. Animal ecology. New York, Macmillan Co.
+9. Genoways, H. H. (Ed.), 1987. Current Mammalogy: Volume 1. Springer US.
+10. Masini, F. &amp; B. Sala, 2007. Large- and small-mammal distribution patterns and chronostratigraphic boundaries from the Late Pliocene to the Middle Pleistocene of the Italian peninsula. Quaternary International, 160: 43–56.
+11. MacArthur, R., H. Recher &amp; M. Cody, 1966. On the Relation between Habitat Selection and Species Diversity. The American Naturalist, 100: 319–332.
+12. Brokaw, N. V. L. &amp; R. A. Lent, 1999. Vertical structure. Pages 373–399 Maintaining Biodiversity in Forest Ecosystems. Cambridge: Cambridge University Press.
+13. Culbert, P. D., V. C. Radeloff, C. H. Flather, J. M. Kellndorfer, C. D. Rittenhouse &amp; A. M. Pidgeon, 2013. The Influence of Vertical and Horizontal Habitat Structure on Nationwide Patterns of Avian BiodiversityLa Influencia de la Estructura Vertical y Horizontal del Hábitat en los Patrones de Diversidad de Aves a Escala Nacional. The Auk, 130: 656–665.
+14. P. S. Corn, 2007. Climate change and amphibians. Animal Biodiversity and Conservation, 28.
+15. Hecnar, S. &amp; R. M’Closkey, 1996. Amphibian species richness and distribution in relation to pond water chemistry in south‐western Ontario, Canada. Freshwater Biology, 36: 7–15.
+16. Porter, K. R., 1972. Herpetology. Philadelphia, PA : Saunders.
+]
+
+---
+
+class: inverse
+
+.center[.huge[**Questions?**]]
+
+&lt;br&gt;&lt;br&gt;
+.left[
+**Remerciements**
+
+- Spécialement Willian Vieira
+&lt;h2&gt;
+- Guillaume Blanchet
+&lt;h2&gt;
+- Dominique Gravel
+&lt;h2&gt;
+- Laboratoire d'écologie intégrative
+]
+
+.pull-right1[
+&lt;br&gt;
+&lt;br&gt;
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="conf/style-macros.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  /* Replace <script> tags in slides area to make them executable
+   *
+   * Runs after post-processing of markdown source into slides and replaces only
+   * <script>s on the last slide of continued slides using the .has-continuation
+   * class added by xaringan. Finally, any <script>s in the slides area that
+   * aren't executed are commented out.
+   */
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container:not(.has-continuation) script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+  var scriptsNotExecuted = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container.has-continuation script'
+  );
+  if (!scriptsNotExecuted.length) return;
+  for (var i = 0; i < scriptsNotExecuted.length; i++) {
+    var comment = document.createComment(scriptsNotExecuted[i].outerHTML)
+    scriptsNotExecuted[i].parentElement.replaceChild(comment, scriptsNotExecuted[i])
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
