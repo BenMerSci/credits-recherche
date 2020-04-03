@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 mypar = list(mar = c(3,3,0.5,0.5), mgp = c(1.5, 0.3, 0), tck = -.008)
 ```
 
-class: notitle, middle, title-slide, 
+class:  middle, title-slide, 
 
 <div class="my-logo-left"></div>
 
@@ -45,15 +45,14 @@ class: notitle, middle, title-slide,
 <i class="fa fa-twitter fa-lg" style="color:#e7e8e2"></i> [@BenMerSci](https://twitter.com/BenMerSci)
 
 ---
-class: clear
-<clear># Tables des matières </clear>
-1. Préambule
-2. Théorie
-3. Objectifs et hypothèse
-4. Méthodologie
-5. Résultats
-6. Analyse
-7. Conclusion
+# Tables des matières
+1. Préambule <br><br>
+2. Théorie <br><br>
+3. Objectifs et hypothèse <br><br>
+4. Méthodologie <br><br>
+5. Résultats <br><br>
+6. Analyse <br><br>
+7. Conclusion <br><br>
 
 ---
 
