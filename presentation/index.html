@@ -4,6 +4,7 @@
     <title>Talk template</title>
     <meta charset="utf-8" />
     <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <script src="assets/kePrint-0.0.1/kePrint.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
     <link rel="stylesheet" href="conf/css/style.css" type="text/css" />
@@ -24,15 +25,13 @@ class:  middle, title-slide,
 &lt;hr width="45%" align="left" size="0.3" color="orange"&gt;&lt;/hr&gt;
 
 ## Crédits de recherche &lt;br&gt; ECL618
-
+&lt;br&gt;&lt;br&gt;
 ### Benjamin Mercier, &lt;br&gt;.small[Baccalauréat en écologie]
-&lt;br&gt;
+
 &lt;i class="fa fa-github fa-lg" style="color:#e7e8e2"&gt;&lt;/i&gt; [BenMerSci/credits-recherche](https://github.com/BenMerSci/credits-recherche)
 
-&lt;i class="fa fa-twitter fa-lg" style="color:#e7e8e2"&gt;&lt;/i&gt; [@BenMerSci](https://twitter.com/BenMerSci)
-
 ---
-# Tables des matières
+# Déroulement de la présentation
 1. Préambule &lt;br&gt;&lt;br&gt;
 2. Théorie &lt;br&gt;&lt;br&gt;
 3. Objectifs et hypothèse &lt;br&gt;&lt;br&gt;
@@ -43,23 +42,131 @@ class:  middle, title-slide,
 
 ---
 
+# Table
+&lt;br&gt;&lt;br&gt;
+&lt;table class="table" style="font-size: 18px; margin-left: auto; margin-right: auto;"&gt;
+&lt;caption style="font-size: initial !important;"&gt;TABLE 1: Les métriques du méta-réseau du Québec entier (Général), puis la moyenne selon chaque biome respectif.&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; NS &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; NBasale &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; NInt &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; NTop &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; NL &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; DensL &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; C &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; GenSD &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; VulSD &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; MoyTR &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; MaxTR &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Omn &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Général &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 627.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 330.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 267.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7964.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.70 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.48 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.79 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Tempérée &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 195.66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.70 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 149.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1858.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.91 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Boréale &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 118.92 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 92.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 846.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.86 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Arctique &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 59.72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 291.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.79 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.98 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;
+&lt;tr&gt;&lt;td style="padding: 0; border: 0;" colspan="100%"&gt;&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding: 0; border: 0;" colspan="100%"&gt;
+&lt;sup&gt;&lt;/sup&gt; NS = Nombre d'espèce, NBasale = Nombre d'espèces basales, NInt = Nombre d'espèces intermédiaires, NTop = Nombre d'espèces supérieures, NL = Nombre de liens, DensL = Densité de liens, C = Connectance, GenSD = Généralité, VulSD = Vulnérabilité, MoyTR = Niveau trophique moyen, MaxTR = Niveau trophique maximum, Omn = Niveau d'omnivorie.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tfoot&gt;
+&lt;/table&gt;
+
+---
+
+# Représentation réseau
+.center[![:scale 70%](images/network_graph.png)]
+
+---
+
+# Cartes
+.center[![:scale 70%](images/sp_richness.png)]
+
+---
+
+# Cartes
+.center[![:scale 70%](images/metrics_map.png)]
+
+---
 class: inverse
 
-.pull-left1[
+.pull-left[
 &lt;br&gt;
 
-# Key message here
+# Questions?
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 
-**Special thanks to**
-
-Nice people
+**Remerciements à**
+ - Dominique Gravel
+ - Marc Bélisle
+ - Guillaume Blanchet
+ - Les membres du laboratoire d'écologie intégrative &lt;br&gt;
 ]
 
 .pull-right1[
 &lt;br&gt;
-![:scale 90%](images/logo.png)
+![:scale 80%](images/logo.png)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

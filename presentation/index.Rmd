@@ -24,7 +24,8 @@ knitr::opts_chunk$set(
   fig.align = 'center',
   fig.retina = 3
 )
-
+library(readr)
+library(kableExtra)
 mypar = list(mar = c(3,3,0.5,0.5), mgp = c(1.5, 0.3, 0), tck = -.008)
 ```
 
@@ -37,15 +38,13 @@ class:  middle, title-slide,
 <hr width="45%" align="left" size="0.3" color="orange"></hr>
 
 ## Crédits de recherche <br> ECL618
-
+<br><br>
 ### Benjamin Mercier, <br>.small[Baccalauréat en écologie]
-<br>
+
 <i class="fa fa-github fa-lg" style="color:#e7e8e2"></i> [BenMerSci/credits-recherche](https://github.com/BenMerSci/credits-recherche)
 
-<i class="fa fa-twitter fa-lg" style="color:#e7e8e2"></i> [@BenMerSci](https://twitter.com/BenMerSci)
-
 ---
-# Tables des matières
+# Déroulement de la présentation
 1. Préambule <br><br>
 2. Théorie <br><br>
 3. Objectifs et hypothèse <br><br>
@@ -56,21 +55,50 @@ class:  middle, title-slide,
 
 ---
 
+# Table
+<br><br>
+```{r comment='', echo=FALSE, results='asis'}
+metric_table <- readRDS("images/final_table.RDS")
+#metric_table[,c(1:5)] <- round(metric_table[,c(1:5)])
+metric_table[,c(1:12)] <- round(metric_table[,c(1:12)], 2)
+metric_table <- knitr::kable(metric_table, format = "html", digits = ncol(metric_table), row.names= TRUE, col.names = colnames(metric_table), caption = "TABLE 1: Les métriques du méta-réseau du Québec entier (Général), puis la moyenne selon chaque biome respectif.")
+kable_styling(metric_table, font_size = 18) %>%
+footnote(general = "NS = Nombre d'espèce, NBasale = Nombre d'espèces basales, NInt = Nombre d'espèces intermédiaires, NTop = Nombre d'espèces supérieures, NL = Nombre de liens, DensL = Densité de liens, C = Connectance, GenSD = Généralité, VulSD = Vulnérabilité, MoyTR = Niveau trophique moyen, MaxTR = Niveau trophique maximum, Omn = Niveau d'omnivorie.")
+```
+
+---
+
+# Représentation réseau
+.center[![:scale 70%](images/network_graph.png)]
+
+---
+
+# Cartes
+.center[![:scale 70%](images/sp_richness.png)]
+
+---
+
+# Cartes
+.center[![:scale 70%](images/metrics_map.png)]
+
+---
 class: inverse
 
-.pull-left1[
+.pull-left[
 <br>
 
-# Key message here
+# Questions?
 
-<br><br><br><br><br><br><br><br>
+<br>
 
-**Special thanks to**
-
-Nice people
+**Remerciements à**
+ - Dominique Gravel
+ - Marc Bélisle
+ - Guillaume Blanchet
+ - Les membres du laboratoire d'écologie intégrative <br>
 ]
 
 .pull-right1[
 <br>
-![:scale 90%](images/logo.png)
+![:scale 80%](images/logo.png)
 ]
