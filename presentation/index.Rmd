@@ -63,7 +63,7 @@ metric_table <- readRDS("images/final_table.RDS")
 metric_table[,c(1:12)] <- round(metric_table[,c(1:12)], 2)
 metric_table <- knitr::kable(metric_table, format = "html", digits = ncol(metric_table), row.names= TRUE, col.names = colnames(metric_table), caption = "TABLE 1: Les métriques du méta-réseau du Québec entier (Général), puis la moyenne selon chaque biome respectif.")
 kable_styling(metric_table, font_size = 18) %>%
-footnote(general = "NS = Nombre d'espèce, NBasale = Nombre d'espèces basales, NInt = Nombre d'espèces intermédiaires, NTop = Nombre d'espèces supérieures, NL = Nombre de liens, DensL = Densité de liens, C = Connectance, GenSD = Généralité, VulSD = Vulnérabilité, MoyTR = Niveau trophique moyen, MaxTR = Niveau trophique maximum, Omn = Niveau d'omnivorie.")
+footnote(general = "NS = Nombre d'espèce, NBasale = Nombre d'espèces basales, NInt = Nombre d'espèces intermédiaires, NTop = Nombre d'espèces supérieures, NL = Nombre de liens, DensL = Densité de liens (NL/NS), C = Connectance (NL/NS²), GenSD = Généralité, VulSD = Vulnérabilité, MoyTR = Niveau trophique moyen, MaxTR = Niveau trophique maximum, Omn = Niveau d'omnivorie.")
 ```
 
 ---
@@ -82,6 +82,12 @@ footnote(general = "NS = Nombre d'espèce, NBasale = Nombre d'espèces basales, 
 .center[![:scale 70%](images/metrics_map.png)]
 
 ---
+
+# Profil latitudinal
+.center[![:scale 70%](images/latitudinal_profil.png)]
+
+---
+
 class: inverse
 
 .pull-left[
