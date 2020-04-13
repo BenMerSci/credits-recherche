@@ -8,7 +8,7 @@
 /*title page*/
   .title-slide {
     background-image: url('../../images/test_test.png');
-    background-color: #23373B;
+    background-color: #587e76;
     background-size: 600px;
     border: 0px!important;
     background-position: 140% 20%;
@@ -101,7 +101,7 @@
   
 /* slide pages */
   .remark-slide-content {
-    border-top: 80px solid #23373B;
+    border-top: 80px solid #587e76;
     font-size: 23px;
     font-weight: 300;
     padding: 1em 2em 1em 2em
@@ -146,7 +146,7 @@ a {
 
 /* background color of inverse slide */
 .inverse {
-    background-color: #23373B;
+    background-color: #587e76;
     color: #d6d6d6;
 }
 .inverse h1 {
