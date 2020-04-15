@@ -35,7 +35,7 @@ class:  middle, title-slide,
 
 # Réseaux trophiques  <br> des vertébrés <br> terrestres du <br> Québec
 
-<hr width="45%" align="left" size="0.3" color="#ffef96"></hr>
+<hr width="45%" align="left" size="0.3" color="#c19a6b"></hr>
 
 ## Crédits de recherche <br> ECL618
 <br><br>
@@ -50,7 +50,7 @@ class:  middle, title-slide,
 3. Objectifs et hypothèse <br><br>
 4. Méthodologie <br><br>
 5. Résultats <br><br>
-6. Analyse <br><br>
+6. Discussion <br><br>
 7. Conclusion <br><br>
 
 ---
@@ -112,20 +112,16 @@ footnote(general = "t = statistique de t, Ddf = Degrés de liberté")
 
 class: inverse
 
+
+# Questions? 
+
+
+<br>
 .pull-left[
-<br>
-
-# Questions?
-
-<br>
-
-**Remerciements à**
+**Remerciements**
  - Dominique Gravel
  - Marc Bélisle
  - Guillaume Blanchet
  - Les membres du laboratoire d'écologie intégrative <br>
 ]
 
-.pull-right1[
-<br>
-]
