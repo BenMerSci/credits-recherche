@@ -22,135 +22,263 @@ class:  middle, title-slide,
 
 # Réseaux trophiques  &lt;br&gt; des vertébrés &lt;br&gt; terrestres du &lt;br&gt; Québec
 
-&lt;hr width="45%" align="left" size="0.3" color="#c19a6b"&gt;&lt;/hr&gt;
+&lt;hr width="45%" align="left" size="0.3" color="#FFFACD"&gt;&lt;/hr&gt;
 
 ## Crédits de recherche &lt;br&gt; ECL618
 &lt;br&gt;&lt;br&gt;
 ### Benjamin Mercier, &lt;br&gt;.small[Baccalauréat en écologie]
 
-&lt;i class="fa fa-github fa-lg" style="color:#e7e8e2"&gt;&lt;/i&gt; [BenMerSci/credits-recherche](https://github.com/BenMerSci/credits-recherche)
-
 ---
-# Déroulement de la présentation
-1. Préambule &lt;br&gt;&lt;br&gt;
-2. Théorie &lt;br&gt;&lt;br&gt;
-3. Objectifs et hypothèse &lt;br&gt;&lt;br&gt;
-4. Méthodologie &lt;br&gt;&lt;br&gt;
-5. Résultats &lt;br&gt;&lt;br&gt;
-6. Discussion &lt;br&gt;&lt;br&gt;
-7. Conclusion &lt;br&gt;&lt;br&gt;
+
+class: inverse
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.font180[**Introduction**]]
 
 ---
 
-# Table
+# Préambule et théorie
+
+- Services écosystémiques découlent des interactions entre espèces .font50[(Daily et al. (1997); Duffy (2009); Jordano (2016))] &lt;br&gt;&lt;br&gt;
+- Réseaux trophiques avec plus d'espèces sont plus productifs .font50[(Duffy (2009); Duffy et al. (2007))]&lt;br&gt;&lt;br&gt;
+- Interactions composants les réseaux non-aléatoires .font50[(Jordano (2016))] &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[![:scale 70%](images/diapo1.png)]
+
+---
+
+# Préambule et théorie (suite)
+
+- Impacts des changements globaux sur les écosystèmes .font50[(Estes et al. (2011); Montoya &amp; Raffaelli (2010))]&lt;br&gt;&lt;br&gt;
+- Changements spatiaux des "enveloppes climatiques" .font50[(Walther et al. (2002); Montoya &amp; Raffaelli (2010))]&lt;br&gt;&lt;br&gt;
+- Affecte les hauts de chaînes trophiques .font50[(Estes et al. (2011))]&lt;br&gt;&lt;br&gt;
+
+.center[**Principaux affectés**]&lt;br&gt;&lt;br&gt;
+.center[![:scale 100%](images/diapo2.png)]
+
+---
+
+# Préambule et théorie (suite)
+.pull-left[
+- Reconstitution basée sur la théorie de la niche intégrée&lt;br&gt; .font50[(Gravel et al. (2019))] &lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.center[Distribution des espèces]
+.center[.font150[&amp;darr;]]
+.center[Interactions&lt;br&gt;.font50[(Elton (1927))]]
+.center[+]
+.center[environnement&lt;br&gt;.font50[(Grinnell (1917))]]
+]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.pull-rifght[
+![:scale 46%](images/niche_integ.png)]
+
+.cite[.font70[Adapté de Gravel et al. (2019)]]
+---
+
+# Objectifs et hypothèse
+&lt;p class="box"&gt;&lt;br&gt;.center[**Reconstituer les réseaux trophiques des vertébrés terrestres du Québec**]&lt;br&gt;&lt;/p&gt;
+1. .font90[Obtenir une image temporelle servant de comparaison pour les années à venir] &lt;br&gt;&lt;br&gt;
+2. .font90[Explorer les conséquences des variations de biodiversité à large échelle spatiale sur la structure et le fonctionnement des réseaux écologiques du Québec.]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.font110[**Hypothèse**]]
+.center[Les métriques de réseaux trophiques varient le long du gradient climatiques Sud-Nord]
+
+---
+
+class: inverse
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.font180[**Méthodologie**]]
+
+---
+
+# Méthodologie
+.center[**Schéma explicatif**]
+.center[![:scale 80%](images/methodo.png)]
+.cite[.font70[Icons made by "https://www.flaticon.com/authors/vitaly-gorbachev"]]
+
+---
+
+# Méthodologie (étape 1)
+.center[![:scale 80%](images/methodo1.png)]
+- Corrections taxonomiques limitants le doublons 
+- Taxons factices pour les non-vertébrés&lt;br&gt;&lt;br&gt;
+
+.center[.font110[**Sortant**]]
+.pull-right[&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;![:scale 50%](images/mat_sortant.png)]
+.pull-left[
+**Matrice d'interaction non-inférée**
+- 1 = interaction
+- 0 = pas d'interaction
+- NA = Inconnu / à inférer
+]
+
+---
+
+# Méthodologie (étape 2)
+.center[![:scale 55%](images/methodo2.png)]
+
+- Inférence des interactions comme les recommandations Netflix .font50[(Desjardins et al. (2017))]
+- Inférence basée sur une mesure de distance &lt;br&gt;&lt;br&gt;
+
+.center[.font110[**Sortant**]]
+.pull-right[&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;![:scale 50%](images/mat_sortant.png)]
+.pull-left[
+**Matrice d'interaction _inférée_**
+- Moins de NAs
+]
+
+---
+
+# Algorithme KNN - Fonctionnement
+.center[**Exemple: k = 1**]
+.center[![:scale 65%](images/algo_knn.png)]
+&lt;br&gt;
+.center[**Projet: k = 5**]
+
+---
+
+# Algorithme KNN - Matrices de distance
+.pull-left[
+**1. Matrice de distance de diète** .font50[(Vegan (2019), R package version 2.5-6.)]&lt;br&gt;
+- Matrice carrée de dimension _627x627_
+- Distance de similarité de diète
+]
+.pull-right[.center[
+`\(Jaccard_d = \frac{a}{(a+b+c)}\)`&lt;br&gt;&lt;br&gt;
+![:scale 40%](images/jaccard_mat.png)]]&lt;br&gt;
+
+.pull-left[
+**2. Matrice de distance phylogénétique** .font50[Vegan (2019), R package version 2.5-6.)]
+- Matrice carrée de dimension _627x627_
+- "Distance taxonomique moyenne" entre chaque espèce .font50[(Clarke &amp; Warwick (1998))]
+]
+
+---
+
+# Algorithme KNN - Matrices de distance
+- Matrice de distance final - **deux scénarios:**&lt;br&gt;
+
+1. Si la diète est connue :&lt;br&gt;&lt;br&gt;
+`\(M_{dist}= (0.8 * M_{diète}) + (0.2 * M_{phylogénie})\)`
+&lt;br&gt;&lt;br&gt;
+2. Si la diète est inconnue (NA) :&lt;br&gt;&lt;br&gt;
+`\(M_{dist}= (0 * M_{diète}) + (1 * M_{phylogénie})\)`
+&lt;br&gt;&lt;br&gt;
+
+&lt;p class="box"&gt;&lt;br&gt;.center[**Diète davantage représentatrice des interactions**]&lt;br&gt;&lt;/p&gt;
+
+---
+
+# Méthodologie (étape 3)
+.center[![:scale 65%](images/methodo3.png)]
+
+- Cartes de distribution pour 390 espèces&lt;br&gt;&lt;br&gt;
+- Taxons factices non-limitants&lt;br&gt;&lt;br&gt;
+- Rasterisation des cartes de distribution&lt;br&gt;&lt;br&gt;
+
+---
+
+# Méthodologie (étape 3)
+&lt;br&gt;
+.pull-left[
+**Expliciter**
+- Sous-matrice d'interaction/cellule
+- Calcul des métriques par cellule/biome&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.left[**Effet du climat et de l'espace**]
+- Effet présent?
+- Si oui, comment varient-ils?
+]
+
+.pull-right[
+![:scale 90%](images/explicit_metric.png)&lt;br&gt;&lt;br&gt;&lt;br&gt;
+![:scale 60%](images/metric_clim.png)
+]
+
+---
+
+class: inverse
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[.font180[**Résultats - Discussion**]]
+
+---
+
+# Résultats - Réseau
+.center[![:scale 70%](images/network_graph.png)]
+
+---
+
+# Résultats - Cartes
+.center[![:scale 70%](images/sp_richness.png)]
+
+---
+
+# Résultats - Métriques
+- Semble avoir une variation dans les métriques selon le biome
 &lt;br&gt;&lt;br&gt;
 &lt;table class="table" style="font-size: 18px; margin-left: auto; margin-right: auto;"&gt;
-&lt;caption style="font-size: initial !important;"&gt;TABLE 1: Les métriques du méta-réseau du Québec entier (Général), puis la moyenne selon chaque biome respectif.&lt;/caption&gt;
+&lt;caption style="font-size: initial !important;"&gt;TABLE 1: Les métriques du méta-réseau du Québec, puis la moyenne selon chaque biome respectif.&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; NS &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; NBasale &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; NInt &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; NTop &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; NL &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; DensL &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; C &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; GenSD &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; VulSD &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; MoyTR &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; MaxTR &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Omn &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Général &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Méta-réseau &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 627.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 30.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 330.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 267.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 7964.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 12.70 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 24.27 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 30.48 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2.26 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 3.79 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Tempérée &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 195.66 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11.70 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 149.54 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 34.41 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1858.24 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8.91 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 15.02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 16.11 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.16 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.29 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 207.47 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.48 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.38 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Boréale &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 118.92 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11.07 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 92.19 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 15.66 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 846.80 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.85 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 9.86 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11.41 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2.11 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 3.23 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Arctique &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 59.72 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 37.67 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11.01 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 291.01 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.79 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.83 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.33 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.35 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.98 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.11 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.12 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;tfoot&gt;
 &lt;tr&gt;&lt;td style="padding: 0; border: 0;" colspan="100%"&gt;&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td style="padding: 0; border: 0;" colspan="100%"&gt;
-&lt;sup&gt;&lt;/sup&gt; NS = Nombre d'espèce, NBasale = Nombre d'espèces basales, NInt = Nombre d'espèces intermédiaires, NTop = Nombre d'espèces supérieures, NL = Nombre de liens, DensL = Densité de liens (NL/NS), C = Connectance (NL/NS²), GenSD = Généralité, VulSD = Vulnérabilité, MoyTR = Niveau trophique moyen, MaxTR = Niveau trophique maximum, Omn = Niveau d'omnivorie.&lt;/td&gt;&lt;/tr&gt;
+&lt;sup&gt;&lt;/sup&gt; NS = Nombre d'espèce, NL = Nombre de liens, DensL = Densité de liens (NL/NS), C = Connectance (NL/NS²), MoyTR = Niveau trophique moyen, MaxTR = Niveau trophique maximum.&lt;/td&gt;&lt;/tr&gt;
 &lt;/tfoot&gt;
 &lt;/table&gt;
 
 ---
 
-# Représentation réseau
-.center[![:scale 70%](images/network_graph.png)]
-
----
-
-# Cartes
-.center[![:scale 70%](images/sp_richness.png)]
-
----
-
-# Cartes
+# Cartes - Métriques
 .center[![:scale 70%](images/metrics_map.png)]
 
 ---
 
-# RDA métriques
-.center[![:scale 75%](images/varpart_fig.png)]
+# Variation selon climat/espace
+
+.pull-left[![:scale 90%](images/varpart_fig.png)]
+
+
+.pull-right[![:scale 100%](images/corr_fig.png)]
 
 
 ---
@@ -160,104 +288,75 @@ class:  middle, title-slide,
 
 ---
 
-# Table test de t
-&lt;br&gt;&lt;br&gt;
-&lt;table class="table" style="font-size: 18px; margin-left: auto; margin-right: auto;"&gt;
-&lt;caption style="font-size: initial !important;"&gt;TABLE 2: Comparaison des métriques par biome&lt;/caption&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Biome 1 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Moyenne biome 1 &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Biome 2 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Moyenne biome 2 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; t &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Ddf &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Valeur de p &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr grouplength="3"&gt;&lt;td colspan="8" style="background-color: #666; color: #fff;"&gt;&lt;strong&gt;Densité de liens (NL/NS)&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-   &lt;td style="text-align:left; padding-left: 2em;" indentlevel="1"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Tempérée &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8.91 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Boréale &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.83 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 450.27 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 283738.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &amp;lt; 0.001 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left; padding-left: 2em;" indentlevel="1"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Tempérée &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8.91 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Arctique &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.79 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 884.67 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 293193.1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &amp;lt; 0.001 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left; padding-left: 2em;" indentlevel="1"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Boréale &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.83 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Arctique &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.79 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1439.22 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 943415.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &amp;lt; 0.001 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr grouplength="3"&gt;&lt;td colspan="8" style="background-color: #666; color: #fff;"&gt;&lt;strong&gt;Connectance (NL/NS²)&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-   &lt;td style="text-align:left; padding-left: 2em;" indentlevel="1"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Tempérée &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Boréale &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -1076.93 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 612403.8 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &amp;lt; 0.001 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left; padding-left: 2em;" indentlevel="1"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Tempérée &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Arctique &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -2370.65 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 572369.6 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &amp;lt; 0.001 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left; padding-left: 2em;" indentlevel="1"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Boréale &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Arctique &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -1551.42 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1015736.5 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &amp;lt; 0.001 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;tfoot&gt;
-&lt;tr&gt;&lt;td style="padding: 0; border: 0;" colspan="100%"&gt;&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding: 0; border: 0;" colspan="100%"&gt;
-&lt;sup&gt;&lt;/sup&gt; t = statistique de t, Ddf = Degrés de liberté&lt;/td&gt;&lt;/tr&gt;
-&lt;/tfoot&gt;
-&lt;/table&gt;
+# Discussion
+.center[**Limitations taxonomiques respectives selon les taxons**]&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[![:scale 100%](images/limit_taxo.png)]
+
+---
+
+# Discussion
+- Perte de structure 3D = perte d'espèces et donc de liens .font50[(Germano &amp; Lawhead (1986); Brokaw, &amp; Lent (1999); MacArthur et al. (1966); Karr (1968); Culbert et al. (2013))]&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+**Biais**&lt;br&gt;
+- Co-existance = interaction? .font50[(Poisto et al. (2015))]&lt;br&gt;&lt;br&gt;
+- Reconstitution dépend ultimement des interactions de base&lt;br&gt;&lt;br&gt;
+- Interactions spécialistes non présentes?
+---
+
+# Amélioration et optimisation
+- Raffiner la taxonomie&lt;br&gt;&lt;br&gt;&lt;br&gt;
+- Optimiser l'algorithme KNN&lt;br&gt;&lt;br&gt;&lt;br&gt;
+- Intégrer la notion de traits d'espèce&lt;br&gt;&lt;br&gt;&lt;br&gt;
+- Trouver davantage de cartes de distribution&lt;br&gt;&lt;br&gt;
+
+---
+
+# Conclusion
+.center[**Objectif principal**]&lt;br&gt;&lt;br&gt;
+.center[Reconstitution des réseaux trophiques semble possible]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[**Hypothèse**]&lt;br&gt;&lt;br&gt;
+.center[Les métriques de réseaux, donc la structure, varient le long du gradient climatique Sud-Nord]&lt;br&gt;&lt;br&gt;
+.center[Effets du climat et de l'espace qui sont fortement corrélés]
+
+
+---
+
+# Références
+.font60[
+- Brokaw, N. V. L. &amp; R. A. Lent, 1999. Vertical structure. Pages 373–399 Maintaining Biodiversity in Forest Ecosystems. Cambridge: Cambridge University Press.&lt;br&gt;
+- Clarke, K. and Warwick, R. (1998). A taxonomic distinctness index and its statistical properties.
+Journal of applied ecology, 35(4) :523–531.&lt;br&gt;
+- Culbert, P. D., V. C. Radeloff, C. H. Flather, J. M. Kellndorfer, C. D. Rittenhouse &amp; A. M. Pidgeon, 2013. The Influence of Vertical and Horizontal Habitat Structure on Nationwide Patterns of Avian BiodiversityLa Influencia de la Estructura Vertical y Horizontal del Hábitat en los Patrones de Diversidad de Aves a Escala Nacional. The Auk, 130: 656–665.&lt;br&gt;
+- Daily, G. C., S. Alexander, P. R. Ehrlich, L. Goulder, P. A. Matson, H. A. Mooney, S. Postel, H. Schneider, D. Tilman &amp; G. M. Woodwell, 1997. Ecosystem services: Benefits Supplied to Human Societies by Natural Ecosystems. Ecological Society of America: 21.&lt;br&gt;    Desjardins-Proulx, P., I. Laigle, T. Poisot &amp; D. Gravel, 2017. Ecological interactions and the Netflix problem. PeerJ, 5: e3644.&lt;br&gt;
+- Duffy, J. E., Cardinale, B. J., France, K. E., McIntyre, P. B., Thébault, E., &amp; Loreau, M. (2007). The functional role of biodiversity in ecosystems: incorporating trophic complexity. Ecology letters, 10(6), 522-538.&lt;br&gt;
+- Duffy, J. E., 2009. Why biodiversity is important to the functioning of real-world ecosystems. Frontiers in Ecology and the Environment, 7: 437–444.&lt;br&gt;
+- Elton, C. S. (Charles S., 1927. Animal ecology. New York, Macmillan Co.&lt;br&gt;
+- Estes, J. A., J. Terborgh, J. S. Brashares, M. E. Power, J. Berger, W. J. Bond, S. R. Carpenter, T. E. Essington, R. D. Holt, J. B. C. Jackson, R. J. Marquis, L. Oksanen, T. Oksanen, R. T. Paine, E. K. Pikitch, W. J. Ripple, S. A. Sandin, M. Scheffer, T. W. Schoener, J. B. Shurin, A. R. E. Sinclair, M. E. Soulé, R. Virtanen &amp; D. A. Wardle, 2011. Trophic Downgrading of Planet Earth. Science, 333: 301–306.&lt;br&gt;
+- Germano, D. J. &amp; D. N. Lawhead, 1986. Species diversity and habitat complexity: Does vegetation organize vertebrate communities in the Great Basin? The Great Basin Naturalist, 46: 711–720.&lt;br&gt;
+- Grinnell, J., 1917. The Niche-Relationships of the California Thrasher. The Auk, 34: 427–433.&lt;br&gt;
+- Jari Oksanen, F. Guillaume Blanchet, Michael Friendly, Roeland Kindt, Pierre Legendre, Dan McGlinn, Peter
+    R. Minchin, R. B. O'Hara, Gavin L. Simpson, Peter Solymos, M. Henry H. Stevens, Eduard Szoecs and Helene
+    Wagner (2019). vegan: Community Ecology Package. R package version 2.5-6.
+    https://CRAN.R-project.org/package=vegan&lt;br&gt;
+- Jordano, P., 2016. Chasing Ecological Interactions. PLOS Biology, 14: e1002559.&lt;br&gt;
+- Karr, J. R., 1968. Habitat and Avian Diversity on Strip-Mined Land in East-Central Illinois. The Condor, 70: 348–357.&lt;br&lt;
+]
+
+---
+
+.font60[
+ - MacArthur, R., H. Recher &amp; M. Cody, 1966. On the Relation between Habitat Selection and Species Diversity. The American Naturalist, 100: 319–332.&lt;br&gt;
+- Montoya, J. M. &amp; D. Raffaelli, 2010. Climate change, biotic interactions and ecosystem services. Philosophical Transactions of the Royal Society B: Biological Sciences, 365: 2013–2018.&lt;br&gt;
+- Poisot, T., D. B. Stouffer &amp; D. Gravel, 2015. Beyond species: why ecological interaction networks vary through space and time. Oikos, 124: 243–251.&lt;br&lt;
+- Walther, G.-R., E. Post, P. Convey, A. Menzel, C. Parmesan, T. J. C. Beebee, J.-M. Fromentin, O. Hoegh-Guldberg &amp; F. Bairlein, 2002. Ecological responses to recent climate change. Nature, 416: 389–395.&lt;br&gt;
+]
 
 ---
 
 class: inverse
 
-
-# Questions? 
-
-
-&lt;br&gt;
 .pull-left[
-**Remerciements**
+.font150[**Remerciements**]
  - Dominique Gravel
  - Marc Bélisle
  - Guillaume Blanchet
